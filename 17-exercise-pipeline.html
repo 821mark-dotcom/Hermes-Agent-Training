@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>17 · Exercise 3 · Full Pipeline — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<title>18 · Exercise 3 · Full Pipeline — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
 <body>
 <div class="layout">
 <nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
@@ -22,7 +22,7 @@
 <div class="callout" style="background:rgba(232,160,32,0.12);border-left:3px solid var(--hermes);padding:10px 14px;border-radius:6px;font-size:12px;margin-bottom:16px">
   <strong>⚡ Pre-requisites — confirm before starting:</strong>
   <ul style="margin:6px 0 0;padding-left:16px">
-    <li>Section 14 profile bootstrap complete: <code>hermes profile list</code> shows researcher, writer, reviewer, builder</li>
+    <li>Section 15 profile bootstrap complete: <code>hermes profile list</code> shows researcher, writer, reviewer, builder</li>
     <li>Gateway running: <code>hermes gateway start</code> (check <code>localhost:9119</code>)</li>
     <li>Workspace running: <code>localhost:3000</code> loads without error</li>
     <li>Board is empty or clean: archive any tasks from previous exercises</li>
@@ -88,7 +88,7 @@
   --worker researcher:"Research CrewAI — features, use cases, strengths, weaknesses" \
   --worker researcher:"Research LangGraph — features, use cases, strengths, weaknesses" \
   --verifier reviewer \
-  --synthesizer writer</div></div></div>
+  --synthesizer writer</div></div><div class="expected-result"><strong>Expected Result:</strong> The swarm or pipeline command creates a task graph where parallel workers complete research and a later synthesis step waits for the earlier work to finish.</div></div>
 <p style="font-size:12px;margin-top:6px">Creates an atomic graph: 3 parallel researcher tasks → 1 reviewer (waits for all 3) → 1 writer/synthesizer (waits for reviewer sign-off). Then watch it run: <code>hermes kanban watch</code></p>
 </div>
 <div class="tab-pane" id="ex3-a">
@@ -120,7 +120,7 @@ hermes kanban create "Write competitive intelligence brief" \
     --assignee writer --parent $T_REV
 
 # Watch the pipeline run
-hermes kanban watch</div></div></div>
+hermes kanban watch</div></div><div class="expected-result"><strong>Expected Result:</strong> The final pipeline output is a visible graph or audit trail showing completed worker tasks, downstream dependency gates, and the final summary or synthesis result.</div></div>
 </div>
 </div>
 
@@ -133,7 +133,7 @@ hermes kanban watch</div></div></div>
 </div></div>
 
 <div class="page-nav">
-  <a class="prev" href="16-exercise-conductor.html"><span class="dir">Previous</span><span class="ttl">16 · Exercise 2 · Mission to Board</span></a>
+  <a class="prev" href="16-exercise-conductor.html"><span class="dir">Previous</span><span class="ttl">17 · Exercise 2 · Mission to Board</span></a>
   <a class="next" href="appendix-quick-ref.html"><span class="dir">Next</span><span class="ttl">Appendix · Quick Reference</span></a>
 </div>
 </main>

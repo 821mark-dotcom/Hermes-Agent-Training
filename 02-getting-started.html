@@ -25,14 +25,14 @@
 <div class="h-callout"><div class="h-lbl">⚡ Hermes Agent — Install &amp; Setup</div>
 <div class="demo"><div class="demo-hd"><span class="role ru">Option A — One-line CLI install (macOS / Linux / WSL2)</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 source ~/.zshrc  # or ~/.bashrc">curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
-source ~/.zshrc  # or ~/.bashrc</div></div></div>
+source ~/.zshrc  # or ~/.bashrc</div></div><div class="expected-result"><strong>Expected Result:</strong> Hermes responds with the active model/provider and a listing of the current working directory or available tools.</div></div>
 <div class="demo"><div class="demo-hd"><span class="role ru">Option B — Docker Compose</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="git clone https://github.com/outsourc-e/hermes-workspace.git
 cd hermes-workspace && cp .env.example .env
 # Add your provider key to .env, then:
 docker compose up">git clone https://github.com/outsourc-e/hermes-workspace.git
 cd hermes-workspace && cp .env.example .env
 # Add your provider key to .env, then:
-docker compose up</div></div></div></div>
+docker compose up</div></div><div class="expected-result"><strong>Expected Result:</strong> The health check returns status details from hermes doctor and the config shows the active model, provider, terminal backend, and gateway state.</div></div></div>
 
 <div class="h-callout" style="margin-top:20px">
 <div class="h-lbl">⚡ Hermes Agent — Add Your GitHub Copilot API Token</div>
@@ -60,7 +60,7 @@ docker compose up</div></div></div></div>
   <button class="tab-btn" data-level="i" onclick="tab(this,'gs-i')">🟡 Intermediate</button>
 </div>
 <div class="tab-pane active" id="gs-b">
-<div class="demo"><div class="demo-hd"><span class="role ru">You</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="What model are you using, what tools do you have access to right now, and what's in my current directory?">What model are you using, what tools do you have access to right now, and what's in my current directory?</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ru">You</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="What model are you using, what tools do you have access to right now, and what's in my current directory?">What model are you using, what tools do you have access to right now, and what's in my current directory?</div></div><div class="expected-result"><strong>Expected Result:</strong> The Dashboard shows the model/provider selection and the source of model configuration in the Hermes Agent setup.</div></div>
 <div class="demo"><div class="demo-hd"><span class="role ra">Hermes Agent</span></div>
 <div class="demo-bd resp">Model: <span class="b">gpt-5.4</span> via <span class="o">copilot</span> provider
 
@@ -72,7 +72,10 @@ docker compose up</div></div></div></div>
 <span class="y">Tip:</span> Run <code>hermes --continue</code> to resume this session later.</div></div>
 </div>
 <div class="tab-pane" id="gs-i">
-<div class="demo"><div class="demo-hd"><span class="role ru">You</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Run hermes doctor and report any issues. Then show me my current config (model, provider, terminal backend, gateway status).">Run hermes doctor and report any issues. Then show me my current config (model, provider, terminal backend, gateway status).</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ru">You</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Run hermes doctor and report any issues. Then show me my current config (model, provider, terminal backend, gateway status).">Run hermes doctor and report any issues. Then show me my current config (model, provider, terminal backend, gateway status).</div></div><div class="expected-result"><strong>Expected Result:</strong> The main model is set to the selected provider/model and the config file reflects the same value.</div></div>
+</div>
+<div class="tab-pane" id="gs-a">
+<div class="demo"><div class="demo-hd"><span class="role ru">You</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Explain the difference between the global Hermes model config and the per-profile model override. Tell me which one controls the main chat, and which one is used when I change a worker profile.">Explain the difference between the global Hermes model config and the per-profile model override. Tell me which one controls the main chat, and which one is used when I change a worker profile.</div></div><div class="expected-result"><strong>Expected Result:</strong> Hermes explains that the global model is the default for the main chat, while profile-specific overrides are for specialized workers or cost optimization.</div></div>
 </div>
 </div>
 
@@ -104,7 +107,7 @@ docker compose up</div></div></div></div>
   provider: copilot      # copilot · openai · anthropic · openrouter · ollama · etc.
   default: openai/gpt-5.4">model:
   provider: copilot      # copilot · openai · anthropic · openrouter · ollama · etc.
-  default: openai/gpt-5.4</div></div></div>
+  default: openai/gpt-5.4</div></div><div class="expected-result"><strong>Expected Result:</strong> The config snippet matches the active value for model/provider and is ready for use by Hermes Agent.</div></div>
 
 <div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
 <div class="pt-body">

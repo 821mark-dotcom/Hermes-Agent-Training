@@ -139,3 +139,16 @@ code{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:3px;
 .page-nav a.prev .dir::before{content:'← ';}
 .page-nav a.next .dir::after{content:' →';}
 ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+
+.expected-result{
+  margin-top:8px;
+  padding:8px 10px;
+  border-left:2px solid var(--green);
+  background:rgba(78,201,176,.06);
+  border-radius:4px;
+  font-size:12px;
+  line-height:1.5;
+  color:var(--text-muted);
+}
+.expected-result strong{color:var(--green);font-weight:700;}

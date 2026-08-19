@@ -82,8 +82,8 @@ Move them all to Ready status so the swarm can pick them up.">Add these tasks to
 - Write tests for the date range filter (Priority: Medium)
 - Update the README with new CLI flags (Priority: Low)
 
-Move them all to Ready status so the swarm can pick them up.</div></div></div></div>
-<div class="demo"><div class="demo-hd"><span class="role ru">You — start the swarm</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Start the swarm once the board is ready.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Start swarm mode with 3 workers: 2 builders and 1 reviewer. Run through all Ready tasks on the board. Checkpoint after each task completion. Flag anything that needs human input in the Inbox.">Start swarm mode with 3 workers: 2 builders and 1 reviewer. Run through all Ready tasks on the board. Checkpoint after each task completion. Flag anything that needs human input in the Inbox.</div></div></div></div>
+Move them all to Ready status so the swarm can pick them up.</div></div><div class="expected-result"><strong>Expected Result:</strong> The board is populated with the requested tasks and then swarm starts workers that process the Ready tasks while the Board/Runtime views show progress.</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ru">You — start the swarm</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Start the swarm once the board is ready.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Start swarm mode with 3 workers: 2 builders and 1 reviewer. Run through all Ready tasks on the board. Checkpoint after each task completion. Flag anything that needs human input in the Inbox.">Start swarm mode with 3 workers: 2 builders and 1 reviewer. Run through all Ready tasks on the board. Checkpoint after each task completion. Flag anything that needs human input in the Inbox.</div></div><div class="expected-result"><strong>Expected Result:</strong> The swarm run creates multiple worker sessions and the Inbox or Review state shows task completions, blockers, or human review requests.</div></div></div>
 </div>
 <div class="tab-pane" id="sw-a">
 <div class="demo"><div class="demo-hd"><span class="role ru">You — full overnight sprint config</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Launch an advanced swarm run with a reviewer and docs worker, then let the board drain overnight.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Configure and launch an overnight swarm:
@@ -112,7 +112,7 @@ Constraints:
 - Any test failures: attempt a fix once, then flag in Inbox if still failing
 - After all tasks complete: write a sprint summary to reports/overnight-summary.md
 
-Board: process all Ready tasks. When done, check Triage for any newly added tasks.</div></div></div></div>
+Board: process all Ready tasks. When done, check Triage for any newly added tasks.</div></div><div class="expected-result"><strong>Expected Result:</strong> The overnight swarm configuration creates a four-worker topology and writes the sprint summary to the requested report file after the run completes.</div></div></div>
 </div>
 </div>
 

@@ -62,17 +62,20 @@ Save these to my memory.">Remember these facts about me and my project:
 - My Jira project key is ACME, Confluence space is ACMETEAM
 - I deploy to production on Fridays only
 
-Save these to my memory.</div></div></div>
+Save these to my memory.</div></div><div class="expected-result"><strong>Expected Result:</strong> Hermes stores the supplied facts in memory and can later recall them in relevant conversation context.</div></div>
+</div>
 </div>
 <div class="tab-pane" id="ms-i">
-<div class="demo"><div class="demo-hd"><span class="role ru">You — install and use a skill</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Find and install a skill for GitHub PR workflows. Then use it to create a PR checklist for the changes in this session.">Find and install a skill for GitHub PR workflows. Then use it to create a PR checklist for the changes in this session.</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ru">You — install and use a skill</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Find and install a skill for GitHub PR workflows. Then use it to create a PR checklist for the changes in this session.">Find and install a skill for GitHub PR workflows. Then use it to create a PR checklist for the changes in this session.</div></div><div class="expected-result"><strong>Expected Result:</strong> The skill is discovered and installed for the requested workflow, and the agent can invoke it through the relevant skill command or slash-style usage.</div></div>
+</div>
 <div class="demo"><div class="demo-hd"><span class="role ru">Terminal — browse and install skills</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="hermes skills search github pr
 hermes skills install official/github/pr-workflow
 # Then use it in chat with:
 # /pr-workflow">hermes skills search github pr
 hermes skills install official/github/pr-workflow
 # Then use it in chat with:
-# /pr-workflow</div></div></div>
+# /pr-workflow</div></div><div class="expected-result"><strong>Expected Result:</strong> The terminal example shows the skill search and install command sequence that would expose the command in the agent environment.</div></div>
+</div>
 </div>
 <div class="tab-pane" id="ms-a">
 <div class="demo"><div class="demo-hd"><span class="role ru">You — create a custom skill</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Create a custom skill called 'jira-sprint-report' that:
@@ -87,7 +90,12 @@ Save it as a SKILL.md file in ~/.hermes/skills/ so I can invoke it with /jira-sp
 3. Formats as a Confluence report
 4. Publishes to the ACMETEAM space
 
-Save it as a SKILL.md file in ~/.hermes/skills/ so I can invoke it with /jira-sprint-report.</div></div></div>
+Save it as a SKILL.md file in ~/.hermes/skills/ so I can invoke it with /jira-sprint-report.</div></div><div class="expected-result"><strong>Expected Result:</strong> A custom SKILL.md file is created in the configured skills directory and is ready to be invoked with the requested skill name.</div></div>
+</div>
+<div class="demo"><div class="demo-hd"><span class="role ru">You — review and refine memory</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Review my memory and remove anything outdated or contradictory. Then add a new rule: I prefer all architecture discussions to start with a short risk summary, then tradeoffs, then a recommendation.
+Also update my SOUL.md to reflect that I value clarity, directness, and pragmatic engineering over hype.">Review my memory and remove anything outdated or contradictory. Then add a new rule: I prefer all architecture discussions to start with a short risk summary, then tradeoffs, then a recommendation.
+Also update my SOUL.md to reflect that I value clarity, directness, and pragmatic engineering over hype.</div></div><div class="expected-result"><strong>Expected Result:</strong> Memory review removes stale or contradictory facts and leaves the updated preference or persona state in place for subsequent sessions.</div></div>
+</div>
 </div>
 </div>
 
@@ -101,7 +109,7 @@ Save it as a SKILL.md file in ~/.hermes/skills/ so I can invoke it with /jira-sp
 
 <div class="page-nav">
   <a class="prev" href="09-swarm.html"><span class="dir">Previous</span><span class="ttl">09 · Swarm Mode</span></a>
-  <a class="next" href="11-files-terminal.html"><span class="dir">Next</span><span class="ttl">11 · Files &amp; Terminal</span></a>
+  <a class="next" href="10a-agents-working.html"><span class="dir">Next</span><span class="ttl">11 · Agents Working</span></a>
 </div>
 </main>
 </div>

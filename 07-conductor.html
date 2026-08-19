@@ -56,10 +56,20 @@
 <div class="demo-label">Just Show Me — Mission Prompts</div>
 <div class="tabs">
 <div class="tab-buttons">
+  <button class="tab-btn ab" data-level="b" onclick="tab(this,'cd-b')">🟢 Beginner</button>
   <button class="tab-btn ai" data-level="i" onclick="tab(this,'cd-i')">🟡 Intermediate</button>
   <button class="tab-btn" data-level="a" onclick="tab(this,'cd-a')">🟣 Advanced</button>
 </div>
-<div class="tab-pane active" id="cd-i">
+<div class="tab-pane active" id="cd-b">
+<div class="demo"><div class="demo-hd"><span class="role ru">Beginner mission</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Keep the first mission narrow and concrete so Conductor can plan without guessing.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Mission: Improve the README for this project.
+Goal: add a short setup section, explain the main commands, and list the expected first-run steps.
+Constraints: do not change application code.
+Success criteria: the README is clearer and includes a simple installation + verification flow.">Mission: Improve the README for this project.
+Goal: add a short setup section, explain the main commands, and list the expected first-run steps.
+Constraints: do not change application code.
+Success criteria: the README is clearer and includes a simple installation + verification flow.</div></div><div class="expected-result"><strong>Expected Result:</strong> Conductor produces a short, actionable plan and a clear scope for documentation work without overreaching into code changes.</div></div>
+</div>
+<div class="tab-pane" id="cd-i">
 <div class="demo"><div class="demo-hd"><span class="role ru">New Mission prompt</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Mission: Add a /api/reports/weekly endpoint to this project.
 
 Requirements:
@@ -78,7 +88,7 @@ Requirements:
 - Write 3 pytest tests covering: success, empty result, Jira auth failure
 - Update README.md with the new endpoint docs
 
-Success criteria: all 3 tests pass, linter shows 0 errors.</div></div></div>
+Success criteria: all 3 tests pass, linter shows 0 errors.</div></div><div class="expected-result"><strong>Expected Result:</strong> Conductor decomposes the mission into concrete work items and the mission result shows a plan, agent assignments, and progress checkpoints.</div></div>
 </div>
 <div class="tab-pane" id="cd-a">
 <div class="demo"><div class="demo-hd"><span class="role ru">Advanced mission — parallel workstreams</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Mission: Reliability improvement sprint.
@@ -97,7 +107,7 @@ Workstreams (run in parallel):
 3. SCRIBE: Document the retry behavior in CONTRIBUTING.md and update the API error reference
 4. OPS: Add a health check endpoint that verifies Jira + Confluence connectivity
 
-Each agent should checkpoint after completing their workstream. Final report: list what changed and the before/after test count.</div></div></div>
+Each agent should checkpoint after completing their workstream. Final report: list what changed and the before/after test count.</div></div><div class="expected-result"><strong>Expected Result:</strong> The mission creates a parallel workstream plan with separate builder/reviewer/scribe/ops tasks, and the live status reflects each stream moving through work and completion.</div></div>
 </div>
 </div>
 
