@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>03 · Hermes Agent Web UI — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Section 03</div>
+<span class="layer-badge lb2">⚡ Layer 2 · Hermes Agent</span>
+<h1>Hermes Agent Web UI — The Built-in Dashboard</h1>
+<div class="meta"><span class="badge bt">⏱ 10 min</span><span class="badge bb">Beginner</span><span class="badge bi">Intermediate</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>Hermes Agent has its own browser UI at <code>localhost:9119</code> — no Workspace needed. It's lighter and faster for quick tasks: checking sessions, switching models, editing config, browsing skills, and chatting directly. Think of it as the "admin panel" for your agent.</p></div>
+
+<div class="h-callout"><div class="h-lbl">⚡ Hermes Agent — Start the Dashboard Web UI</div>
+<div class="demo"><div class="demo-hd"><span class="role ru">Terminal</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="hermes dashboard        # opens http://localhost:9119 in your browser">hermes dashboard        # opens http://localhost:9119 in your browser</div></div></div>
+<p style="margin-top:8px;font-size:12px">Open <code>http://localhost:9119</code> directly if the browser doesn't auto-open.</p></div>
+
+<div class="ss-wrap">
+  <img src="screenshots/ha-chat.png" alt="Hermes Agent Dashboard Chat">
+  <div class="ss-cap"><div class="dot" style="background:var(--hermes)"></div><span>Hermes Agent Dashboard · Chat page · Left nav shows all built-in pages</span></div>
+</div>
+
+<h2>Left nav pages</h2>
+<div class="grid grid2">
+  <div class="card"><h4>💬 Chat</h4><p>Direct chat with your agent. Same sessions as CLI — pick up any conversation.</p></div>
+  <div class="card"><h4>📋 Sessions</h4><p>Browse, search, resume, rename, export, or prune past sessions.</p></div>
+  <div class="card"><h4>📁 Files</h4><p>Browse your workspace files without leaving the browser.</p></div>
+  <div class="card"><h4>🤖 Models</h4><p>Switch providers and models interactively. Add OAuth or API keys.</p></div>
+  <div class="card"><h4>📜 Logs</h4><p>Real-time agent, gateway, and error logs with filtering.</p></div>
+  <div class="card"><h4>⏰ Cron</h4><p>Create, pause, resume, and inspect scheduled jobs.</p></div>
+  <div class="card"><h4>🧩 Skills</h4><p>Browse installed skills, install from hub, configure per-platform.</p></div>
+  <div class="card"><h4>🔌 MCP</h4><p>Add and manage MCP server configurations.</p></div>
+  <div class="card"><h4>📡 Channels</h4><p>Configure messaging platform connections (Telegram, Slack, Discord…).</p></div>
+  <div class="card"><h4>⚙️ Config</h4><p>Edit config.yaml settings: model, terminal backend, agent behavior.</p></div>
+  <div class="card"><h4>🔑 Keys</h4><p>Manage API keys stored in ~/.hermes/.env.</p></div>
+  <div class="card"><h4>🖥️ System</h4><p>Version, health, platform status, restart gateway.</p></div>
+</div>
+
+<div class="ss-wrap">
+  <img src="screenshots/ha-sessions.png" alt="Hermes Agent Sessions page">
+  <div class="ss-cap"><div class="dot" style="background:var(--hermes)"></div><span>Sessions page — every conversation saved, searchable, resumable</span></div>
+</div>
+
+<div class="demo-label">Just Show Me — Common Dashboard Tasks</div>
+<div class="tabs">
+<div class="tab-buttons">
+  <button class="tab-btn ab" data-level="b" onclick="tab(this,'ha-b')">🟢 Beginner</button>
+  <button class="tab-btn" data-level="i" onclick="tab(this,'ha-i')">🟡 Intermediate</button>
+</div>
+<div class="tab-pane active" id="ha-b">
+<p style="font-size:12px;color:var(--text-muted);margin-bottom:8px">In the Dashboard Chat at :9119, try:</p>
+<div class="demo"><div class="demo-hd"><span class="role ru">You</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Show me all sessions from the past week. Which one had the most tool calls?">Show me all sessions from the past week. Which one had the most tool calls?</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ru">You</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="What's my current model and provider? How do I switch to Claude Sonnet?">What's my current model and provider? How do I switch to Claude Sonnet?</div></div></div>
+</div>
+<div class="tab-pane" id="ha-i">
+<div class="demo"><div class="demo-hd"><span class="role ru">You</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Show me my last 5 sessions. For each one, give me: title, message count, model used, and estimated cost. Then tell me which session was most expensive.">Show me my last 5 sessions. For each one, give me: title, message count, model used, and estimated cost. Then tell me which session was most expensive.</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ru">You</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Create a cron job that runs every Monday at 8am: ask me what my top 3 priorities are for the week and send the summary to my Telegram.">Create a cron job that runs every Monday at 8am: ask me what my top 3 priorities are for the week and send the summary to my Telegram.</div></div></div>
+</div>
+</div>
+
+<div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>hermes serve</strong> = headless backend (no browser UI) — used by the desktop app. <strong>hermes dashboard</strong> = same backend but opens the browser UI. Use <code>dashboard</code> for daily use.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Settings → Connection</strong> in the Workspace can update the backend URL live — no restart needed. Values persist to <code>~/.hermes/workspace-overrides.json</code>.</span></div>
+<div class="tip"><span class="i">⚡</span><span>The dashboard Chat tab uses the same sessions as the CLI. They're fully interchangeable — start a chat in the terminal, continue it in the browser, and vice versa.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="02-getting-started.html"><span class="dir">Previous</span><span class="ttl">02 · Getting Started</span></a>
+  <a class="next" href="04-dashboard.html"><span class="dir">Next</span><span class="ttl">04 · Workspace Dashboard</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>14 · Agent Chaining &amp; Handoffs — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Section 14</div>
+<span class="layer-badge lb2">⚡ Layer 2 · Hermes Agent</span>
+<span class="layer-badge lb3">🖥️ Layer 3 · Hermes Workspace</span>
+<h1>Agent Chaining &amp; Handoffs</h1>
+<div class="meta"><span class="badge bt">⏱ 12 min</span><span class="badge bi">Intermediate</span><span class="badge ba">Advanced</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>When one AI agent finishes a job, how does the next agent know what was done and what to do next? In Hermes, there are two ways: a quick direct hand-off (like passing a note) and a durable work queue (like a shared whiteboard where anyone can read the history). The whiteboard version is more powerful — it survives crashes, allows human check-ins, and is the foundation for Conductor, Swarm, and Operations.</p></div>
+
+<h2>Two Chaining Mechanisms</h2>
+<p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">Hermes has two distinct ways agents can chain work. They look similar but behave very differently:</p>
+<div style="overflow-x:auto;margin-bottom:20px">
+<table style="width:100%;border-collapse:collapse;font-size:12px">
+<thead><tr style="background:var(--surface2)">
+  <th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)"></th>
+  <th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);color:var(--hermes)">⚡ delegate_task</th>
+  <th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);color:var(--ws)">🖥️ Kanban Parent Link</th>
+</tr></thead>
+<tbody>
+<tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text-muted)">Shape</td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">RPC call — fork → join</td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">Durable message queue + state machine</td></tr>
+<tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text-muted)">Context handoff</td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">Parent must pass everything explicitly in <code>goal/context</code></td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">Parent's <code>summary+metadata</code> auto-flows to child via <code>kanban_show()</code></td></tr>
+<tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text-muted)">Durability</td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">Process-tied — restart = lost</td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">SQLite-backed — survives restarts, crashes</td></tr>
+<tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text-muted)">Human in loop</td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">Not supported</td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">Block → comment → unblock at any point</td></tr>
+<tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text-muted)">Agent identity</td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">Anonymous subagent</td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">Named profile with persistent memory</td></tr>
+<tr><td style="padding:7px 10px;color:var(--text-muted)">Best for</td><td style="padding:7px 10px">Quick single-turn sub-tasks within a session</td><td style="padding:7px 10px">Multi-agent pipelines, overnight sprints, anything needing audit trail</td></tr>
+</tbody></table>
+</div>
+
+<p style="font-size:12px;color:var(--text-muted)">One-sentence rule: use <code>delegate_task</code> when you need a fast answer back in the same conversation. Use Kanban when work crosses agent boundaries or might need human input.</p>
+
+<h2>How the Kanban Handoff Actually Works</h2>
+<p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">This is the exact mechanism. There is no magic — it is three steps:</p>
+
+<div class="h-callout"><div class="h-lbl">⚡ Hermes Agent — The Three-Step Handoff</div>
+<p style="font-size:12px;margin-bottom:10px"><strong>Step 1 — Agent X completes with a structured handoff:</strong></p>
+<div class="demo"><div class="demo-hd"><span class="role ra">Agent X (tool call before exiting)</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-bd" data-prompt='kanban_complete(
+    summary="Researched AI funding landscape. Key finding: seed rounds up 40% YoY. Full notes in research.md",
+    metadata={"changed_files": ["research.md"], "decisions": ["focus on Series A", "exclude EU for now"]}
+)'>kanban_complete(
+    summary="Researched AI funding landscape. Key finding: seed rounds up 40% YoY. Full notes in research.md",
+    metadata={"changed_files": ["research.md"], "decisions": ["focus on Series A", "exclude EU for now"]}
+)</div></div>
+<p style="font-size:12px;margin:10px 0 6px"><strong>Step 2 — Y's task was created with X as a parent:</strong></p>
+<div class="demo"><div class="demo-hd"><span class="role ru">You (CLI or Dashboard)</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="hermes kanban create &quot;Write launch post from research findings&quot; \
+    --assignee writer \
+    --parent t_x1a2b3   # X's task id — Y waits here until X is done">hermes kanban create "Write launch post from research findings" \
+    --assignee writer \
+    --parent t_x1a2b3   # X's task id — Y waits here until X is done</div></div></div>
+<p style="font-size:12px;margin:10px 0 6px"><strong>Step 3 — When Y spawns and calls <code>kanban_show()</code>, it receives:</strong></p>
+<div class="demo"><div class="demo-hd"><span class="role ra">What Agent Y sees in its context</span></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="## Parent task results
+### t_x1a2b3 (completed 4 minutes ago)
+Researched AI funding landscape. Key finding: seed rounds up 40% YoY. Full notes in research.md
+_metadata_: {&quot;changed_files&quot;: [&quot;research.md&quot;], &quot;decisions&quot;: [&quot;focus on Series A&quot;, &quot;exclude EU for now&quot;]}">## Parent task results
+### t_x1a2b3 (completed 4 minutes ago)
+Researched AI funding landscape. Key finding: seed rounds up 40% YoY. Full notes in research.md
+_metadata_: {"changed_files": ["research.md"], "decisions": ["focus on Series A", "exclude EU for now"]}</div></div></div>
+<p style="font-size:12px;margin-top:8px">Agent Y did not need any special configuration. The board wires the context automatically. Y's task sat in <code>todo</code> status while X ran, then auto-promoted to <code>ready</code> the moment X completed. The dispatcher picked it up on the next 60s tick.</p>
+</div>
+
+<h2>Profile Routing — How the Decomposer Chooses Assignees</h2>
+<p style="font-size:13px;color:var(--text-muted);margin-bottom:10px">When you drop a task in Triage with auto-decompose on, the decomposer reads your installed profiles and their descriptions to decide who gets what child task. Without descriptions, it can only route by name.</p>
+
+<div class="grid grid2" style="margin-bottom:16px">
+  <div class="card" style="border-left:3px solid var(--hermes)"><h4>Set description via CLI</h4><div class="demo" style="margin-top:8px"><div class="demo-hd"><span class="role ru">Terminal</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-bd" data-prompt='hermes profile describe researcher \
+    --text "Searches sources, synthesizes findings into structured notes with citations"'>hermes profile describe researcher \
+    --text "Searches sources, synthesizes findings into structured notes with citations"</div></div></div>
+  <div class="card" style="border-left:3px solid var(--ws)"><h4>Set description via Dashboard Kanban</h4><p style="font-size:12px">Dashboard → Kanban tab → <strong>▸ Orchestration settings</strong> → per-profile description editor. Click a profile name, type the description, save. Same result as the CLI command.</p></div>
+</div>
+
+<h2>What's Already Running Out of the Box</h2>
+<div class="grid grid3" style="margin-bottom:16px">
+  <div class="card" style="border-top:3px solid var(--green)"><h4>✅ Dispatcher</h4><p style="font-size:12px">Runs inside the gateway. <code>dispatch_in_gateway: true</code> is the default. 60s tick. No setup needed.</p></div>
+  <div class="card" style="border-top:3px solid var(--green)"><h4>✅ Auto-decompose</h4><p style="font-size:12px"><code>auto_decompose: true</code> is the default. Drop a task in Triage → decomposer fans it out automatically.</p></div>
+  <div class="card" style="border-top:3px solid var(--green)"><h4>✅ KANBAN_GUIDANCE</h4><p style="font-size:12px">The worker lifecycle instructions are auto-injected into every spawned worker. No per-profile skill setup required.</p></div>
+</div>
+
+<h2>One-Time Setup: Create Specialist Profiles</h2>
+<p style="font-size:13px;color:var(--text-muted);margin-bottom:10px">The dispatcher can only route to profiles that exist. Run this once — takes about 30 seconds. After this, the exercises in Sections 15–17 will work with full auto-routing.</p>
+
+<div class="h-callout"><div class="h-lbl">⚡ Hermes Agent — Profile Bootstrap (run once)</div>
+<div class="demo"><div class="demo-hd"><span class="role ru">Terminal — paste and run</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="hermes profile create researcher
+hermes profile describe researcher --text &quot;Searches primary sources, synthesizes findings into structured notes with citations. Good for research tasks, market analysis, and information gathering.&quot;
+
+hermes profile create writer
+hermes profile describe writer --text &quot;Takes structured research notes and produces polished prose for a target audience. Good for blog posts, reports, documentation, and summaries.&quot;
+
+hermes profile create reviewer
+hermes profile describe reviewer --text &quot;Reviews completed work for quality, accuracy, and completeness. Requests specific changes or approves. Does not implement — only evaluates.&quot;
+
+hermes profile create builder
+hermes profile describe builder --text &quot;Writes, refactors, and debugs code. Has full terminal and file tool access. Good for feature implementation, bug fixes, and automated testing.&quot;
+
+hermes kanban init
+hermes gateway start">hermes profile create researcher
+hermes profile describe researcher --text "Searches primary sources, synthesizes findings into structured notes with citations. Good for research tasks, market analysis, and information gathering."
+
+hermes profile create writer
+hermes profile describe writer --text "Takes structured research notes and produces polished prose for a target audience. Good for blog posts, reports, documentation, and summaries."
+
+hermes profile create reviewer
+hermes profile describe reviewer --text "Reviews completed work for quality, accuracy, and completeness. Requests specific changes or approves. Does not implement — only evaluates."
+
+hermes profile create builder
+hermes profile describe builder --text "Writes, refactors, and debugs code. Has full terminal and file tool access. Good for feature implementation, bug fixes, and automated testing."
+
+hermes kanban init
+hermes gateway start</div></div></div>
+<p style="font-size:12px;margin-top:8px">Verify with: <code>hermes profile list</code> — you should see default, km-agent, researcher, writer, reviewer, builder.</p>
+</div>
+
+<h2>Three Canonical Chaining Patterns</h2>
+<div class="grid grid3">
+  <div class="card" style="border-top:3px solid var(--green)"><h4>P1 · Fan-out</h4><p style="font-size:12px">N agents run the same role in parallel. Each gets an independent task. No parent links needed.</p><code style="font-size:11px;display:block;margin-top:6px;color:var(--text-muted)">researcher-a → t_r1<br>researcher-b → t_r2<br>(run concurrently)</code></div>
+  <div class="card" style="border-top:3px solid var(--hermes)"><h4>P2 · Pipeline</h4><p style="font-size:12px">Sequential chain: A finishes → B starts with A's output → C starts with B's output.</p><code style="font-size:11px;display:block;margin-top:6px;color:var(--text-muted)">researcher → writer<br>  [--parent t_r1]<br>reviewer [--parent t_w1]</code></div>
+  <div class="card" style="border-top:3px solid var(--ws)"><h4>Swarm v1 Topology</h4><p style="font-size:12px">Parallel workers → single verifier → single synthesizer. Atomic graph creation in one command.</p><code style="font-size:11px;display:block;margin-top:6px;color:var(--text-muted)">hermes kanban swarm "goal"<br>  --worker researcher:task<br>  --verifier reviewer<br>  --synthesizer writer</code></div>
+</div>
+
+<div class="demo" style="margin-top:16px"><div class="demo-hd"><span class="role ru">P2 Pipeline — full CLI example</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-bd" data-prompt="# Step 1: create the research task
+hermes kanban create &quot;Research AI funding trends 2026&quot; --assignee researcher
+
+# Step 2: create the writing task — linked to step 1
+# (t_r1 is the id returned by step 1)
+hermes kanban create &quot;Write a 300-word launch post from research findings&quot; \
+    --assignee writer \
+    --parent t_r1
+
+# Step 3: create a review task — linked to step 2
+hermes kanban create &quot;Review launch post for accuracy and tone&quot; \
+    --assignee reviewer \
+    --parent t_w1
+
+# Watch the board live
+hermes kanban watch"># Step 1: create the research task
+hermes kanban create "Research AI funding trends 2026" --assignee researcher
+
+# Step 2: create the writing task — linked to step 1
+# (t_r1 is the id returned by step 1)
+hermes kanban create "Write a 300-word launch post from research findings" \
+    --assignee writer \
+    --parent t_r1
+
+# Step 3: create a review task — linked to step 2
+hermes kanban create "Review launch post for accuracy and tone" \
+    --assignee reviewer \
+    --parent t_w1
+
+# Watch the board live
+hermes kanban watch</div></div>
+
+<div class="callout" style="background:rgba(124,156,245,0.08);border-left:3px solid var(--ws);padding:10px 14px;border-radius:6px;font-size:12px;margin-top:16px">
+  <strong>🖥️ What Conductor and Swarm UI do under the hood:</strong> They both use this Kanban parent-link pipeline internally. Conductor decomposes your mission into child tasks with parent links and assignees. Swarm routes to pre-defined worker → verifier → synthesizer roles. The Workspace UI is a front door; the actual wiring is always the Kanban board you can inspect at <code>localhost:9119/kanban</code>.
+</div>
+
+<div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>The quality of summary= is the quality of the handoff.</strong> A vague <code>summary="done"</code> leaves the next agent with nothing to go on. A good summary names what changed, what was decided, and what the next agent should know. The metadata dict is machine-readable — the next agent can use it to find files without parsing prose.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Inspect any worker's context before it runs:</strong> <code>hermes kanban context &lt;task_id&gt;</code> shows exactly what the spawned worker will see — title, body, parent results, comments, prior attempts. Use this to debug handoff quality.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Orchestrator profiles should not execute.</strong> If you create an orchestrator profile, restrict its toolsets to <code>kanban</code>, <code>gateway</code>, and <code>memory</code> only. This prevents the orchestrator from accidentally doing implementation work instead of routing it.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>auto_decompose vs manual:</strong> Keep <code>auto_decompose: true</code> (the default). If you want to control exactly what gets decomposed, use the ⚗ Decompose button on individual triage cards in the Dashboard Kanban instead of toggling auto off globally.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="13-dashboard-mcp.html"><span class="dir">Previous</span><span class="ttl">13 · Dashboard &amp; MCP</span></a>
+  <a class="next" href="15-exercise-kanban.html"><span class="dir">Next</span><span class="ttl">15 · Exercise 1 · Task Sprint</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

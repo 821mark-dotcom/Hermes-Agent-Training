@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>10 · Memory &amp; Skills — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Section 10</div>
+<span class="layer-badge lb2">⚡ Layer 2 · Hermes Agent</span>
+<h1>Memory &amp; Skills — The Learning Loop</h1>
+<div class="meta"><span class="badge bt">⏱ 10 min</span><span class="badge bb">Beginner</span><span class="badge bi">Intermediate</span><span class="badge ba">Advanced</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p><strong>Memory</strong> is what Hermes knows about you — facts from past conversations, stored in <code>MEMORY.md</code>, FTS5-indexed so they're searchable across sessions. <strong>Skills</strong> are reusable how-to guides (SKILL.md files) that teach Hermes specific procedures. Browse 2,000+ from the community hub, or write your own. Both update automatically as you work.</p></div>
+
+<div class="h-callout"><div class="h-lbl">⚡ Hermes Agent — How Memory Works</div>
+<ul>
+  <li><strong>MEMORY.md</strong> — your personal memory file at <code>~/.hermes/MEMORY.md</code>; Hermes reads and updates it each session</li>
+  <li><strong>USER.md</strong> — a model of who you are, built by Hermes over time (work patterns, preferences, context)</li>
+  <li><strong>FTS5 indexing</strong> — all memory full-text searchable across every past session</li>
+  <li><strong>LLM summarization</strong> — long memory periodically compressed to stay useful</li>
+  <li><strong>External providers</strong> — optionally connect Honcho, Mem0, or other memory backends</li>
+</ul></div>
+
+<div class="w-callout"><div class="w-lbl">🖥️ Hermes Workspace — Memory Browser</div>
+<ul>
+  <li><strong>Browse tab</strong> — see all memory entries with timestamps</li>
+  <li><strong>Search tab</strong> — full-text search across all memory</li>
+  <li><strong>Live editor</strong> — edit MEMORY.md directly in the browser with markdown preview</li>
+  <li><strong>Edit button</strong> — inline editing of individual memory entries</li>
+</ul></div>
+
+<div class="ss-wrap">
+  <img src="screenshots/ws-memory.png" alt="Hermes Workspace Memory Browser">
+  <div class="ss-cap"><div class="dot" style="background:var(--ws)"></div><span>Hermes Workspace · Memory · Browse / Search tabs, live markdown editor</span></div>
+</div>
+
+<div class="ss-wrap">
+  <img src="screenshots/ws-skills.png" alt="Hermes Workspace Skills Browser">
+  <div class="ss-cap"><div class="dot" style="background:var(--ws)"></div><span>Hermes Workspace · Skills · Marketplace with 2,000+ skills, origin badges, source filters</span></div>
+</div>
+
+<div class="demo-label">Just Show Me — Memory &amp; Skills in Action</div>
+<div class="tabs">
+<div class="tab-buttons">
+  <button class="tab-btn ab" data-level="b" onclick="tab(this,'ms-b')">🟢 Beginner</button>
+  <button class="tab-btn" data-level="i" onclick="tab(this,'ms-i')">🟡 Intermediate</button>
+  <button class="tab-btn" data-level="a" onclick="tab(this,'ms-a')">🟣 Advanced</button>
+</div>
+<div class="tab-pane active" id="ms-b">
+<div class="demo"><div class="demo-hd"><span class="role ru">You — teach Hermes about you</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Remember these facts about me and my project:
+- I work on a Jira/Confluence reporting tool in Python
+- I prefer concise responses with code examples over long explanations
+- My Jira project key is ACME, Confluence space is ACMETEAM
+- I deploy to production on Fridays only
+
+Save these to my memory.">Remember these facts about me and my project:
+- I work on a Jira/Confluence reporting tool in Python
+- I prefer concise responses with code examples over long explanations
+- My Jira project key is ACME, Confluence space is ACMETEAM
+- I deploy to production on Fridays only
+
+Save these to my memory.</div></div></div>
+</div>
+<div class="tab-pane" id="ms-i">
+<div class="demo"><div class="demo-hd"><span class="role ru">You — install and use a skill</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Find and install a skill for GitHub PR workflows. Then use it to create a PR checklist for the changes in this session.">Find and install a skill for GitHub PR workflows. Then use it to create a PR checklist for the changes in this session.</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ru">Terminal — browse and install skills</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="hermes skills search github pr
+hermes skills install official/github/pr-workflow
+# Then use it in chat with:
+# /pr-workflow">hermes skills search github pr
+hermes skills install official/github/pr-workflow
+# Then use it in chat with:
+# /pr-workflow</div></div></div>
+</div>
+<div class="tab-pane" id="ms-a">
+<div class="demo"><div class="demo-hd"><span class="role ru">You — create a custom skill</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Create a custom skill called 'jira-sprint-report' that:
+1. Fetches current sprint data from Jira (project: ACME)
+2. Calculates velocity, completion rate, and top blockers
+3. Formats as a Confluence report
+4. Publishes to the ACMETEAM space
+
+Save it as a SKILL.md file in ~/.hermes/skills/ so I can invoke it with /jira-sprint-report.">Create a custom skill called 'jira-sprint-report' that:
+1. Fetches current sprint data from Jira (project: ACME)
+2. Calculates velocity, completion rate, and top blockers
+3. Formats as a Confluence report
+4. Publishes to the ACMETEAM space
+
+Save it as a SKILL.md file in ~/.hermes/skills/ so I can invoke it with /jira-sprint-report.</div></div></div>
+</div>
+</div>
+
+<div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>Never put secrets in memory:</strong> MEMORY.md is readable plaintext. API keys and passwords belong in <code>~/.hermes/.env</code>.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Skills are slash commands:</strong> Every installed skill becomes a <code>/skill-name</code> command in chat. Run <code>/jira-sprint-report</code> to invoke your custom skill instantly.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Memory audit:</strong> Say "review my memory and clean up anything outdated" periodically. Stale facts cause subtle mistakes in long-running sessions.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>SOUL.md</strong> is the global persona file at <code>~/.hermes/SOUL.md</code> — define Hermes' default voice, communication style, and priorities here. Applied to every session.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="09-swarm.html"><span class="dir">Previous</span><span class="ttl">09 · Swarm Mode</span></a>
+  <a class="next" href="11-files-terminal.html"><span class="dir">Next</span><span class="ttl">11 · Files &amp; Terminal</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>13 · Dashboard &amp; MCP — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Section 14</div>
+<span class="layer-badge lb3">🖥️ Layer 3 · Hermes Workspace</span>
+<h1>MCP — External Tools and Integrations</h1>
+<div class="meta"><span class="badge bt">⏱ 8 min</span><span class="badge bi">Intermediate</span><span class="badge ba">Advanced</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p><strong>MCP</strong> (Model Context Protocol) lets Hermes connect to external tools and services: GitHub, databases, file systems, and more, through a standardized protocol. This is separate from the Workspace Dashboard: Dashboard is the operational console; MCP is the extension channel that plugs in new tools.</p></div>
+
+<div class="h-callout"><div class="h-lbl">⚡ Hermes Agent / Workspace — MCP Integration</div>
+<ul>
+  <li><strong>MCP servers</strong> — connect any MCP-compatible tool: GitHub, Postgres, Slack, file systems, custom APIs</li>
+  <li><strong>Tool discovery</strong> — Hermes automatically discovers tools exposed by connected MCP servers</li>
+  <li><strong>Catalog</strong> — browse Nous-approved MCP servers from within the Workspace MCP page</li>
+  <li><strong>Per-server filtering</strong> — enable only the tools you want from each server</li>
+</ul>
+<div class="demo"><div class="demo-hd"><span class="role ru">Terminal — add an MCP server</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="# Add GitHub MCP server
+hermes mcp add github \
+  --command npx \
+  --args '-y @modelcontextprotocol/server-github' \
+  --env GITHUB_PERSONAL_ACCESS_TOKEN=ghp_xxx
+
+# Browse the catalog
+hermes mcp catalog"># Add GitHub MCP server
+hermes mcp add github \
+  --command npx \
+  --args '-y @modelcontextprotocol/server-github' \
+  --env GITHUB_PERSONAL_ACCESS_TOKEN=ghp_xxx
+
+# Browse the catalog
+hermes mcp catalog</div></div></div></div>
+
+<div class="demo-label">Just Show Me — MCP Queries</div>
+<div class="tabs">
+<div class="tab-buttons">
+  <button class="tab-btn ai" data-level="i" onclick="tab(this,'dm-i')">🟡 Intermediate</button>
+  <button class="tab-btn" data-level="a" onclick="tab(this,'dm-a')">🟣 Advanced</button>
+</div>
+<div class="tab-pane active" id="dm-i">
+<div class="demo"><div class="demo-hd"><span class="role ru">You — usage analysis</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Show me my usage this week: total sessions, estimated cost, which model I used most, and which task type (code / research / writing) dominated my conversations.">Show me my usage this week: total sessions, estimated cost, which model I used most, and which task type (code / research / writing) dominated my conversations.</div></div></div>
+</div>
+<div class="tab-pane" id="dm-a">
+<div class="demo"><div class="demo-hd"><span class="role ru">You — MCP-powered workflow</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Using the GitHub MCP server: list all open PRs in my repo, identify which ones have been open more than 5 days without review, and post a gentle reminder comment on each one tagging the reviewers.">Using the GitHub MCP server: list all open PRs in my repo, identify which ones have been open more than 5 days without review, and post a gentle reminder comment on each one tagging the reviewers.</div></div></div>
+</div>
+</div>
+
+<div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>Attention card first:</strong> Start each day by checking the Dashboard attention card. It surfaces blocked tasks, failed jobs, and pending reviews — your morning briefing.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Filter MCP tools:</strong> Each MCP server exposes many tools. Use <code>hermes mcp configure &lt;server&gt;</code> to enable only the specific tools you need — keeps the agent's tool space clean.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>hermes insights</strong> in CLI gives the same analytics as the Dashboard cost ledger, in terminal format. Useful for quick spend checks without opening the browser.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="12-messaging-gateway.html"><span class="dir">Previous</span><span class="ttl">12 · Messaging Gateway</span></a>
+  <a class="next" href="appendix-quick-ref.html"><span class="dir">Next</span><span class="ttl">Appendix · Quick Reference</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

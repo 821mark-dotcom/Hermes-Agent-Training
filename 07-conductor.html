@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>07 · Conductor — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Section 07</div>
+<span class="layer-badge lb3">🖥️ Layer 3 · Hermes Workspace</span>
+<h1>Conductor — Mission Control</h1>
+<div class="meta"><span class="badge bt">⏱ 15 min</span><span class="badge bi">Intermediate</span><span class="badge ba">Advanced</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>Conductor is your mission orchestrator. You describe a goal in plain English. It breaks the mission into subtasks and assigns them to a pool of worker agents, which may appear as names like Nova, Pixel, or Blaze. Those names are example roster labels for the mission team, not special pre-created personas you must build manually. Conductor coordinates the work and shows progress as each slice completes.</p></div>
+
+<div class="w-callout"><div class="w-lbl">🖥️ Hermes Workspace — Conductor page</div>
+<ul>
+  <li><strong>New Mission</strong> — describe your goal; Conductor decomposes it</li>
+  <li><strong>Agent team</strong> — names such as Nova, Pixel, Blaze are mission-worker labels shown with status: Ready / Working / Done</li>
+  <li><strong>Mission list</strong> — all active and past missions with live status</li>
+  <li><strong>How it works</strong> — button explains the orchestration model</li>
+  <li><strong>Live updates</strong> — agents report progress checkpoints in real time</li>
+</ul></div>
+
+<div class="w-callout" style="border-left-color:var(--text-muted)"><div class="w-lbl" style="color:var(--text-muted)">ℹ️ Note on Conductor availability</div>
+<p style="font-size:12px">Conductor uses the dashboard mission API when <code>hermes dashboard</code> is running. When the dashboard endpoint is absent, Workspace falls back to native Swarm dispatch. Both paths produce the same result.</p></div>
+
+<div class="ss-wrap">
+  <img src="screenshots/ws-conductor.png" alt="Hermes Workspace Conductor">
+  <div class="ss-cap"><div class="dot" style="background:var(--ws)"></div><span>Hermes Workspace · Conductor · example roster labels (Nova / Pixel / Blaze) in a live mission panel</span></div>
+</div>
+
+<div class="use-case"><div class="uc-label">Use Case — Build a New API Endpoint, Start to Finish</div>
+<p><strong>Goal:</strong> Add a <code>/api/reports/weekly</code> endpoint that queries Jira, formats data, and returns JSON. You want: the implementation, tests, and updated README — without touching the keyboard yourself.</p></div>
+
+<div class="callout" style="background:rgba(124,156,245,0.08);border-left:3px solid var(--ws);padding:10px 14px;border-radius:6px;font-size:12px;margin:0 0 16px">
+  <strong>Learning / Building Path</strong><br>
+  <strong>Use Conductor after Tasks:</strong> Conductor is the next level up from the board. It takes a goal and decomposes it into tasks automatically. This is the right place to move after you understand the board lifecycle.
+  <br><br>
+  <strong>Sequence:</strong> <strong>Tasks</strong> → <strong>Conductor</strong> → <strong>Operations</strong> → <strong>Swarm</strong>. <strong>Beginner combo:</strong> one small mission, clear success criteria, and one Builder-type task. <strong>Intermediate:</strong> multi-agent mission with tests/docs. <strong>Advanced:</strong> parallel workstreams, custom profiles, and swarm automation.
+</div>
+
+<h2>Live Setup — Step by Step</h2>
+<ol class="steps">
+  <li>Ensure <code>hermes gateway run</code> and <code>hermes dashboard</code> are both running</li>
+  <li>Open Hermes Workspace → navigate to <strong>Conductor</strong></li>
+  <li>Click <strong>New Mission</strong> — describe your goal (see prompt below)</li>
+  <li>Conductor decomposes the mission: Builder agent gets the code task, Reviewer gets tests, Scribe gets docs</li>
+  <li>Watch the worker labels (for example Nova/Pixel/Blaze) change from <strong>Ready → Working</strong></li>
+  <li>Checkpoints appear as agents report progress — review without blocking them</li>
+  <li>Mission completes: review the output in the mission results panel</li>
+</ol>
+
+<div class="demo-label">Just Show Me — Mission Prompts</div>
+<div class="tabs">
+<div class="tab-buttons">
+  <button class="tab-btn ai" data-level="i" onclick="tab(this,'cd-i')">🟡 Intermediate</button>
+  <button class="tab-btn" data-level="a" onclick="tab(this,'cd-a')">🟣 Advanced</button>
+</div>
+<div class="tab-pane active" id="cd-i">
+<div class="demo"><div class="demo-hd"><span class="role ru">New Mission prompt</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Mission: Add a /api/reports/weekly endpoint to this project.
+
+Requirements:
+- Query Jira for issues closed in the past 7 days
+- Format as JSON: { sprint, issues_closed, velocity, blockers }
+- Add the route to main.py following the existing pattern
+- Write 3 pytest tests covering: success, empty result, Jira auth failure
+- Update README.md with the new endpoint docs
+
+Success criteria: all 3 tests pass, linter shows 0 errors.">Mission: Add a /api/reports/weekly endpoint to this project.
+
+Requirements:
+- Query Jira for issues closed in the past 7 days
+- Format as JSON: { sprint, issues_closed, velocity, blockers }
+- Add the route to main.py following the existing pattern
+- Write 3 pytest tests covering: success, empty result, Jira auth failure
+- Update README.md with the new endpoint docs
+
+Success criteria: all 3 tests pass, linter shows 0 errors.</div></div></div>
+</div>
+<div class="tab-pane" id="cd-a">
+<div class="demo"><div class="demo-hd"><span class="role ru">Advanced mission — parallel workstreams</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Mission: Reliability improvement sprint.
+
+Workstreams (run in parallel):
+1. BUILDER: Add retry logic with exponential backoff to all Jira API calls (jira_client.py)
+2. REVIEWER: Write tests for each retry scenario (3 retries, timeout, auth failure)
+3. SCRIBE: Document the retry behavior in CONTRIBUTING.md and update the API error reference
+4. OPS: Add a health check endpoint that verifies Jira + Confluence connectivity
+
+Each agent should checkpoint after completing their workstream. Final report: list what changed and the before/after test count.">Mission: Reliability improvement sprint.
+
+Workstreams (run in parallel):
+1. BUILDER: Add retry logic with exponential backoff to all Jira API calls (jira_client.py)
+2. REVIEWER: Write tests for each retry scenario (3 retries, timeout, auth failure)
+3. SCRIBE: Document the retry behavior in CONTRIBUTING.md and update the API error reference
+4. OPS: Add a health check endpoint that verifies Jira + Confluence connectivity
+
+Each agent should checkpoint after completing their workstream. Final report: list what changed and the before/after test count.</div></div></div>
+</div>
+</div>
+
+<div class="tip"><span class="i">⚡</span><span><strong>Too vague? It pauses, it does not silently execute:</strong> If a mission is underspecified — for example, no target files, no success criteria, no constraints, or no clear scope — Conductor should stop and ask for the missing details instead of guessing. In practice, the mission stays in a <strong>Blocked / Needs clarification</strong> state until the goal is actionable; it does not start running in the background or rely on a blinking-only signal. Once the missing detail is supplied, Conductor can decompose the work and dispatch the agents.</span></div>
+
+<div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>Write the mission like a ticket:</strong> Include requirements, constraints, and success criteria. The more specific you are, the better Conductor decomposes the work.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>git commit before launching:</strong> Conductor makes real file edits. A clean commit before a mission = easy rollback with <code>git stash</code> if needed.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Checkpoints are milestone updates:</strong> Each agent emits a checkpoint in the Conductor mission panel as it completes a slice of work. They show <strong>who</strong> reported it (for example, a worker labeled Nova or Blaze), <strong>what</strong> was finished, and optionally a short summary of the result or next step. These labels are just the mission roster names; they are not separate app accounts you had to create ahead of time. You can review them live in the mission log / live status view — they are your early-warning signal for drift, errors, or a task that needs attention before the whole mission completes.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Human planning / vetting gate is possible:</strong> Yes — if you want Conductor to pause for a human plan review, include that explicitly in the mission prompt. Example: <code>Stop after the implementation plan is written and wait for human approval before any code changes begin.</code> In that pattern, Conductor creates a planning or review task first, and the mission does not advance to the execution work until the human approves or adds a comment. This is not an automatic hidden toggle; it is enforced by the mission design and the task dependency graph.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="06-tasks.html"><span class="dir">Previous</span><span class="ttl">06 · Tasks (Kanban)</span></a>
+  <a class="next" href="08-operations.html"><span class="dir">Next</span><span class="ttl">08 · Operations</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

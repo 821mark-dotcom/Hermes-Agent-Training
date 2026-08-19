@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>15 · Exercise 1 · Task Sprint — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Exercise 1</div>
+<span class="layer-badge lb2">⚡ Layer 2 · Hermes Agent</span>
+<h1>Your First Task Sprint</h1>
+<div class="meta"><span class="badge bt">⏱ 20 min</span><span class="badge bb">Beginner</span><span class="badge bi">Intermediate</span></div>
+
+<div class="use-case" style="margin-bottom:16px"><div class="uc-label">🎯 Exercise Goal</div>
+<p>Manually create a sprint of tasks, navigate the full Kanban board, experience every column, move cards, and watch the dispatcher pick up an assigned task — all without writing a single prompt to an agent.</p></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>Before you let agents run loose on a board, you need to know how the board works. This exercise is you driving the car in an empty parking lot: create tasks, drag them around, open the detail drawer, and understand what "Triage → Todo → Ready → In Progress → Review → Done" actually means in practice. Then you'll assign one task to an agent and watch it get picked up automatically.</p></div>
+
+<div class="h-callout"><div class="h-lbl">⚡ Hermes Agent — What You'll Use</div>
+<ul>
+  <li><strong>Dashboard Kanban</strong> (<code>localhost:9119/kanban</code>) — the full Kanban board with all columns, drag-drop, and dispatcher controls. <em>Note: Workspace Tasks is a lightweight preview — use the Dashboard for this exercise.</em></li>
+  <li><strong>Column + buttons</strong> — create tasks directly in any column</li>
+  <li><strong>Card drawer</strong> — click any card to open the detail panel (assignee, description, dependencies, status actions)</li>
+  <li><strong>Nudge dispatcher</strong> — skip the 60s wait and force a dispatch pass now</li>
+  <li><strong>CLI mirror</strong> — <code>hermes kanban list</code> shows the same board state in the terminal</li>
+</ul></div>
+
+<div class="callout" style="background:rgba(78,201,176,0.08);border-left:3px solid var(--l1);padding:10px 14px;border-radius:6px;font-size:12px;margin-bottom:16px">
+  <strong>📋 Expected Output:</strong> 5 tasks created, spanning at least 3 different columns, with 1 task in Done. One task assigned to the <code>default</code> profile and dispatched to In Progress via the Nudge dispatcher button.
+</div>
+
+<h2>Step-by-Step</h2>
+<ol class="steps">
+  <li><strong>Open Dashboard Kanban</strong><br>Navigate to <code>localhost:9119/kanban</code>. Note the toolbar: <em>Orchestration: Auto</em> pill, <em>Nudge dispatcher</em> button, column count badges all showing 0.</li>
+  <li><strong>Create your first task in Triage</strong><br>Click <strong>+</strong> on the Triage column header. Title: <em>"Audit current API authentication flow"</em>. Leave assignee blank. Click create. The task appears as a card.</li>
+  <li><strong>Create 4 more tasks across different columns</strong><br>
+    Click <strong>+</strong> on <strong>Todo</strong> → <em>"Design new auth token schema"</em><br>
+    Click <strong>+</strong> on <strong>Ready</strong> → <em>"Implement token refresh endpoint"</em> — set assignee: <code>default</code><br>
+    Click <strong>+</strong> on <strong>Triage</strong> → <em>"Write unit tests for token flow"</em><br>
+    Click <strong>+</strong> on <strong>Triage</strong> → <em>"Update API documentation"</em></li>
+  <li><strong>Open a card and explore the detail drawer</strong><br>Click the <em>"Audit current API..."</em> card (not a drag — a click). The drawer opens on the right. Explore: editable title, assignee dropdown, priority badge, description field, <strong>dependency editor</strong> (add parent/child), status action row (→ ready / → running / block / complete / archive).</li>
+  <li><strong>Drag a card between columns</strong><br>Drag <em>"Audit current API..."</em> from Triage to <strong>Ready</strong>. Watch the status badge change. The card is now visible in the Ready column with a gray "ready" dot.</li>
+  <li><strong>Assign the Ready task and nudge the dispatcher</strong><br>Click <em>"Implement token refresh endpoint"</em> to open its drawer. Confirm assignee is <code>default</code> and status is Ready. Close the drawer. Click <strong>Nudge dispatcher</strong> in the toolbar. Within a few seconds the task should move to <strong>In Progress</strong> — the gateway has spawned the default profile as a worker.</li>
+  <li><strong>Mark a task Done</strong><br>Open the <em>"Design new auth token schema"</em> drawer. In the status action row, click <strong>complete</strong>. Add a result note: <em>"Schema defined: JWT with 15m access token, 7d refresh token, user_id + scopes payload."</em> The card moves to Done. Note the board header stats update.</li>
+  <li><strong>Mirror the board in the terminal</strong><br>
+    <div class="demo" style="margin-top:8px"><div class="demo-hd"><span class="role ru">Terminal</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-bd" data-prompt="hermes kanban list
+hermes kanban stats">hermes kanban list
+hermes kanban stats</div></div>
+    <p style="font-size:12px;margin-top:6px">The CLI output matches the board exactly — both surfaces read from the same <code>kanban.db</code>.</p></li>
+</ol>
+
+<div class="use-case" style="margin-top:20px"><div class="uc-label">Real-World Use Case Examples</div>
+<div class="grid grid3">
+  <div class="card"><h4>Sprint Planning</h4><p style="font-size:12px">Drop your entire backlog into Triage at once. Manually promote the highest-priority items to Ready. Let the dispatcher pick them up as agent capacity allows.</p></div>
+  <div class="card"><h4>Code Review Queue</h4><p style="font-size:12px">Each PR becomes a task in Triage. The reviewer profile picks up Ready items. Blocked = awaiting author response. Review = LLM finished, waiting for human sign-off.</p></div>
+  <div class="card"><h4>Onboarding Checklist</h4><p style="font-size:12px">Create one task per onboarding step. A human moves them manually as each step completes — no agents needed. The board is the audit trail.</p></div>
+</div></div>
+
+<div class="demo-label" style="margin-top:20px">Demo Prompts — Hermes Chat to Build a Board</div>
+<div class="tabs">
+<div class="tab-buttons">
+  <button class="tab-btn ab" data-level="b" onclick="tab(this,'ex1-b')">🟢 Beginner</button>
+  <button class="tab-btn" data-level="i" onclick="tab(this,'ex1-i')">🟡 Intermediate</button>
+</div>
+<div class="tab-pane active" id="ex1-b">
+<div class="demo"><div class="demo-hd"><span class="role ru">You — ask Hermes to build the board for you</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Create 5 tasks on the kanban board for a small API security audit sprint:
+1. Audit current authentication flow — Triage
+2. Research OAuth2/JWT best practices — Triage
+3. Design new token schema — Todo
+4. Implement token refresh endpoint — Ready, assign to default
+5. Write unit tests for the new flow — Todo
+
+Use hermes kanban create for each one. Show me the board with hermes kanban list when done.">Create 5 tasks on the kanban board for a small API security audit sprint:
+1. Audit current authentication flow — Triage
+2. Research OAuth2/JWT best practices — Triage
+3. Design new token schema — Todo
+4. Implement token refresh endpoint — Ready, assign to default
+5. Write unit tests for the new flow — Todo
+
+Use hermes kanban create for each one. Show me the board with hermes kanban list when done.</div></div></div>
+</div>
+<div class="tab-pane" id="ex1-i">
+<div class="demo"><div class="demo-hd"><span class="role ru">You — bulk load with auto-specify</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Add these 5 tasks to the kanban board in Triage, then run a specify pass on each one to flesh out the task body into a proper spec:
+
+1. Audit current authentication flow
+2. Research OAuth2/JWT best practices
+3. Design new token schema — assign to default
+4. Implement token refresh endpoint — assign to default
+5. Write unit tests for the new flow
+
+After specifying, show me the full board with hermes kanban list --status todo.">Add these 5 tasks to the kanban board in Triage, then run a specify pass on each one to flesh out the task body into a proper spec:
+
+1. Audit current authentication flow
+2. Research OAuth2/JWT best practices
+3. Design new token schema — assign to default
+4. Implement token refresh endpoint — assign to default
+5. Write unit tests for the new flow
+
+After specifying, show me the full board with hermes kanban list --status todo.</div></div></div>
+</div>
+</div>
+
+<div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>Triage ≠ Todo.</strong> Triage is for rough ideas where the spec isn't ready. Todo is for fully specified tasks waiting on a dependency or assignment. Don't use Triage as a permanent parking lot — it triggers the auto-decomposer on every dispatcher tick.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>The column + button inherits the column's status.</strong> Click + on Ready to create a task that starts Ready (dependencies satisfied, just needs an assignee). Click + on Triage to create a task that starts as a rough idea.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Nudge dispatcher is your fast-forward button.</strong> The dispatcher normally runs every 60s. During exercises and testing, use Nudge to skip the wait and see results immediately.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>In Progress ≠ Running.</strong> The Dashboard column is labelled "In Progress" but the underlying status is <code>running</code>. In the CLI (<code>hermes kanban list</code>), you'll see <code>running</code> — same thing.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="10-memory-skills.html"><span class="dir">Previous</span><span class="ttl">11 · Memory &amp; Skills</span></a>
+  <a class="next" href="10a-agents-working.html"><span class="dir">Next</span><span class="ttl">11A · Agents Working</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

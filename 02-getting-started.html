@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>02 · Getting Started — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Section 02</div>
+<span class="layer-badge lb2">⚡ Layer 2 · Hermes Agent</span>
+<h1>Getting Started — Install &amp; First Launch</h1>
+<div class="meta"><span class="badge bt">⏱ 10 min</span><span class="badge bb">Beginner</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>Three install paths. Pick the one that matches you. Run <code>hermes setup</code>, choose a model provider, and verify one clean chat works. That's it — don't add features until this baseline passes.</p></div>
+
+<h2>Install paths</h2>
+<div class="grid grid3" style="margin-bottom:16px">
+  <div class="card" style="border-top:3px solid var(--green)"><h4>🖥️ Desktop App (easiest)</h4><p>macOS / Windows installer from the Hermes website. Includes CLI + desktop UI.</p></div>
+  <div class="card" style="border-top:3px solid var(--hermes)"><h4>⚡ One-line CLI</h4><p>Linux / macOS / WSL2 / Android. Installs to <code>~/.hermes/</code>.</p></div>
+  <div class="card" style="border-top:3px solid var(--ws)"><h4>🐳 Docker</h4><p>Self-hosters and home labs. Gateway + Workspace in one compose.</p></div>
+</div>
+
+<div class="h-callout"><div class="h-lbl">⚡ Hermes Agent — Install &amp; Setup</div>
+<div class="demo"><div class="demo-hd"><span class="role ru">Option A — One-line CLI install (macOS / Linux / WSL2)</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
+source ~/.zshrc  # or ~/.bashrc">curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
+source ~/.zshrc  # or ~/.bashrc</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ru">Option B — Docker Compose</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="git clone https://github.com/outsourc-e/hermes-workspace.git
+cd hermes-workspace && cp .env.example .env
+# Add your provider key to .env, then:
+docker compose up">git clone https://github.com/outsourc-e/hermes-workspace.git
+cd hermes-workspace && cp .env.example .env
+# Add your provider key to .env, then:
+docker compose up</div></div></div></div>
+
+<div class="h-callout" style="margin-top:20px">
+<div class="h-lbl">⚡ Hermes Agent — Add Your GitHub Copilot API Token</div>
+<p style="margin-bottom:10px">The fastest safe method is to generate a token locally with GitHub CLI and paste it into the Hermes setup prompt. Do this in a <strong>new terminal</strong> before running <code>hermes setup</code>:</p>
+<ol class="steps">
+  <li><strong>Install GitHub CLI</strong> (if needed):<br><div class="demo" style="margin-top:6px"><div class="demo-hd"><span class="role ru">Terminal</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-bd" data-prompt="brew install gh">brew install gh</div></div></li>
+  <li><strong>Log in to GitHub</strong>:<br><div class="demo" style="margin-top:6px"><div class="demo-hd"><span class="role ru">Terminal</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-bd" data-prompt="gh auth login">gh auth login</div></div></li>
+  <li><strong>Print your token</strong> — copy the output:<br><div class="demo" style="margin-top:6px"><div class="demo-hd"><span class="role ru">Terminal</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-bd" data-prompt="gh auth token">gh auth token</div></div></li>
+</ol>
+<p style="font-size:12px;margin-top:8px">When <code>hermes setup</code> asks for your Copilot API key, paste the token from step 3. You do not need to store it separately — Hermes persists it in <code>~/.hermes/.env</code> after first use.</p>
+</div>
+
+<ol class="steps" style="margin-top:20px">
+  <li><strong>Run setup wizard</strong> — choose your LLM provider and model<br><code>hermes setup --portal</code> &nbsp;(one OAuth covers model + Tool Gateway tools)</li>
+  <li><strong>Verify chat works</strong> — one clean conversation before adding anything<br><code>hermes</code> or <code>hermes --tui</code> for the modern terminal UI</li>
+  <li><strong>Test session resume</strong> — ensures persistence is working<br><code>hermes --continue</code> &nbsp;(should resume your last session)</li>
+  <li><strong>Run a health check</strong> — catches config issues early<br><code>hermes doctor</code></li>
+  <li><strong>Start the gateway</strong> — only after base chat is confirmed<br><code>hermes gateway run</code></li>
+</ol>
+
+<div class="demo-label">Just Show Me — First Chat Verification</div>
+<div class="tabs">
+<div class="tab-buttons">
+  <button class="tab-btn ab" data-level="b" onclick="tab(this,'gs-b')">🟢 Beginner</button>
+  <button class="tab-btn" data-level="i" onclick="tab(this,'gs-i')">🟡 Intermediate</button>
+</div>
+<div class="tab-pane active" id="gs-b">
+<div class="demo"><div class="demo-hd"><span class="role ru">You</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="What model are you using, what tools do you have access to right now, and what's in my current directory?">What model are you using, what tools do you have access to right now, and what's in my current directory?</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ra">Hermes Agent</span></div>
+<div class="demo-bd resp">Model: <span class="b">gpt-5.4</span> via <span class="o">copilot</span> provider
+
+<span class="g">Active tools:</span> execute_code, bash, read_file, write_file, web_search, browser
+
+<span class="g">Current directory:</span> ~/projects/my-app
+  main.py  requirements.txt  README.md  src/
+
+<span class="y">Tip:</span> Run <code>hermes --continue</code> to resume this session later.</div></div>
+</div>
+<div class="tab-pane" id="gs-i">
+<div class="demo"><div class="demo-hd"><span class="role ru">You</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Run hermes doctor and report any issues. Then show me my current config (model, provider, terminal backend, gateway status).">Run hermes doctor and report any issues. Then show me my current config (model, provider, terminal backend, gateway status).</div></div></div>
+</div>
+</div>
+
+<div class="ss-wrap" style="margin-top:20px">
+  <img src="screenshots/ha-config.png" alt="Hermes Agent config page">
+  <div class="ss-cap"><div class="dot" style="background:var(--hermes)"></div><span>Hermes Agent Dashboard (:9119) — Config page. Set provider, model, and API keys here.</span></div>
+</div>
+
+<h2>Configuring Your Primary LLM</h2>
+<div class="callout" style="background:rgba(232,160,32,0.08);border-left:3px solid var(--hermes);padding:10px 14px;border-radius:6px;font-size:12px;margin-bottom:14px">
+  <strong>⚡ Hermes Agent only</strong> — Model configuration lives exclusively in the <strong>Hermes Agent Dashboard</strong> (<code>localhost:9119</code>). Hermes Workspace has no model settings of its own; it inherits whatever Hermes Agent is using.
+</div>
+
+<div class="h-callout"><div class="h-lbl">⚡ Hermes Agent — Models page (<code>localhost:9119/models</code>)</div>
+<div class="grid grid2" style="margin-bottom:12px">
+  <div class="card"><h4>🌟 Main Model</h4><p>The model used for all chat sessions. Click <strong>CHANGE</strong> to pick a different provider or model. Takes effect on new sessions.</p></div>
+  <div class="card"><h4>⚙️ Auxiliary Tasks</h4><p>11 background tasks (vision, compression, kanban decomposer, etc.). Default is <strong>"all auto"</strong> — uses your main model. Click <strong>CONFIGURE</strong> only if you need task-specific overrides.</p></div>
+</div>
+<p style="font-size:12px;margin-bottom:4px"><strong>Recommendation: leave Auxiliary Tasks at AUTO.</strong> The auto setting inherits your main model for all background tasks. Changing individual tasks only makes sense for cost optimization at scale (e.g., pointing the decomposer at a cheaper model while keeping your main model on a frontier tier).</p>
+</div>
+
+<div class="ss-wrap" style="margin-top:16px">
+  <img src="screenshots/ha-models-detail.png" alt="Hermes Agent Models page">
+  <div class="ss-cap"><div class="dot" style="background:var(--hermes)"></div><span>Hermes Agent Dashboard · Models · MAIN MODEL (CHANGE) · AUXILIARY TASKS "all auto" (CONFIGURE) · Mixture of Agents</span></div>
+</div>
+
+<p style="font-size:12px;color:var(--text-muted);margin-top:10px">Prefer editing config directly? The main model is stored in <code>~/.hermes/config.yaml</code>:</p>
+<div class="demo"><div class="demo-hd"><span class="role ru">~/.hermes/config.yaml</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="model:
+  provider: copilot      # copilot · openai · anthropic · openrouter · ollama · etc.
+  default: openai/gpt-5.4">model:
+  provider: copilot      # copilot · openai · anthropic · openrouter · ollama · etc.
+  default: openai/gpt-5.4</div></div></div>
+
+<div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>Minimum 64K context:</strong> Hermes requires models with at least 64,000 context tokens. Most hosted models (Claude, GPT, Gemini) meet this easily. Local models need <code>--ctx-size 65536</code>.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>hermes setup --portal</strong> is the fastest path: one OAuth login covers a model + web search + image generation + TTS via Nous Portal.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Don't add features until base chat works.</strong> Get one clean conversation first, then layer on gateway, cron, skills, or the workspace.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="01-the-three-layers.html"><span class="dir">Previous</span><span class="ttl">01 · The Three Layers</span></a>
+  <a class="next" href="03-hermes-agent-web-ui.html"><span class="dir">Next</span><span class="ttl">03 · Hermes Agent Web UI</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

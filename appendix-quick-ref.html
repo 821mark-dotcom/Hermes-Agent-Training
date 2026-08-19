@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Appendix · Quick Reference — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Appendix A</div>
+<span class="layer-badge lb1">💻 Layer 1 · Vibe-Coding Reference</span>
+<h1>Quick Reference — Vibe-Coding Foundations</h1>
+<div class="meta"><span class="badge bt">⏱ 5 min</span><span class="badge bb">Beginner</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>The techniques that make Layer 1 (VS Code + Copilot) work better. These apply everywhere — with or without Hermes Agent.</p></div>
+
+<h2>The RCTF Prompt Framework</h2>
+<div class="grid grid2" style="margin-bottom:16px">
+  <div class="card" style="border-left:3px solid var(--purple)"><h4 style="color:var(--purple)">Role</h4><p>"Act as a senior Python engineer…" — sets expertise level and perspective.</p></div>
+  <div class="card" style="border-left:3px solid var(--blue-dark)"><h4 style="color:var(--blue-dark)">Context</h4><p>"This project fetches from Jira and publishes to Confluence…" — grounds the answer.</p></div>
+  <div class="card" style="border-left:3px solid var(--green)"><h4 style="color:var(--green)">Task</h4><p>"…refactor the error handling in jira_client.py…" — specific, actionable.</p></div>
+  <div class="card" style="border-left:3px solid var(--yellow)"><h4 style="color:var(--yellow)">Format</h4><p>"…return a diff, a one-line summary, and risk level." — controls output shape.</p></div>
+</div>
+
+<div class="demo"><div class="demo-hd"><span class="role ru">Full RCTF example</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Role: Act as a senior Python developer with REST API expertise.
+Context: This project fetches Jira sprint data and publishes formatted reports to Confluence. Auth uses API tokens from environment variables.
+Task: Refactor the authentication flow in jira_client.py to handle token expiry gracefully without crashing.
+Format: Show the change as a diff, a one-sentence summary of what changed, and a yes/no on whether existing tests need updating.">Role: Act as a senior Python developer with REST API expertise.
+Context: This project fetches Jira sprint data and publishes formatted reports to Confluence. Auth uses API tokens from environment variables.
+Task: Refactor the authentication flow in jira_client.py to handle token expiry gracefully without crashing.
+Format: Show the change as a diff, a one-sentence summary of what changed, and a yes/no on whether existing tests need updating.</div></div></div>
+
+<hr>
+<h2>Prompt Patterns</h2>
+<div class="grid grid2">
+  <div class="card"><h4>❌ Weak</h4><p style="color:var(--red)">Fix the bug</p><p style="margin-top:6px">No file, no function, no expected behavior — Hermes will guess.</p></div>
+  <div class="card"><h4>✅ Strong</h4><p style="color:var(--green)">In jira_client.py, get_sprint_issues() returns empty list when sprint has issues. Read the function, identify the cause, fix it. Show me the diff.</p></div>
+  <div class="card"><h4>❌ Weak</h4><p style="color:var(--red)">Make it faster</p><p style="margin-top:6px">No measurement baseline, no context — can't produce a useful answer.</p></div>
+  <div class="card"><h4>✅ Strong</h4><p style="color:var(--green)">The API call in generate_report() takes 8 seconds. Profile it, find the bottleneck, and suggest 2 optimizations with estimated time savings.</p></div>
+</div>
+
+<hr>
+<h2>Recovery Toolkit</h2>
+<div class="grid grid2">
+  <div class="card" style="border-left:3px solid var(--red)"><h4>Hallucination</h4><p>Agent states something confidently that's wrong.<br><strong>Fix:</strong> "Show me the exact line in the file that confirms this."</p></div>
+  <div class="card" style="border-left:3px solid var(--orange)"><h4>Wrong Edit</h4><p><strong>Fix:</strong> <code>git diff</code> to see changes, <code>git checkout -- filename</code> to undo.</p></div>
+  <div class="card" style="border-left:3px solid var(--yellow)"><h4>Stuck / Looping</h4><p><strong>Fix:</strong> "Stop. Forget that approach. Instead, try [new strategy]. Start from step 1."</p></div>
+  <div class="card" style="border-left:3px solid var(--purple)"><h4>Bad Conversation</h4><p><strong>Fix:</strong> Start a new chat. Old context may be biasing all responses — fresh start is faster.</p></div>
+</div>
+
+<hr>
+<h2>Hermes Agent CLI Cheat Sheet</h2>
+<div class="demo"><div class="demo-hd"><span class="role ru">Essential commands</span></div><div class="demo-bd">hermes                   # start interactive chat
+hermes --tui             # modern TUI interface
+hermes --continue        # resume last session
+hermes -z "prompt"       # one-shot: returns only the answer text
+hermes doctor            # diagnose config issues
+hermes model             # switch provider or model
+hermes gateway run       # start messaging gateway (:8642)
+hermes dashboard         # start web UI (:9119)
+hermes skills browse     # browse 2,000+ skills
+hermes status            # show agent, auth, platform status
+hermes update            # update to latest version</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="13-dashboard-mcp.html"><span class="dir">Previous</span><span class="ttl">13 · Dashboard &amp; MCP</span></a>
+  <a class="next" href="index.html"><span class="dir">Done!</span><span class="ttl">Back to Overview</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>10A · Agents Working — Hermes Training</title><link rel='stylesheet' href='style.css'></head>
+<body>
+<div class='layout'>
+<nav class='sidebar'><div class='sidebar-header'><div class='brand'>Hermes Agent</div><div class='sub'>Training Guide</div></div><div id='nav'></div></nav>
+<main class='main'>
+
+<div class='section-num'>Section 10A</div>
+<span class='layer-badge lb3'>🖥️ Layer 3 · Hermes Workspace</span>
+<h1>Agents Working — From One Prompt to a Coordinated Mission</h1>
+<div class='meta'><span class='badge bt'>⏱ 8 min</span><span class='badge bb'>Beginner</span><span class='badge bi'>Intermediate</span><span class='badge ba'>Advanced</span></div>
+
+<div class='eli10'><div class='lbl'>ELI10</div>
+<p>Hermes is useful as a single chat assistant, then as a task planner, then as a coordinated team. The right mode depends on the job. For a quick answer, use one chat. For a real project, break the goal into tasks and assign them. For repeated or multi-step work, run the mission through Conductor or Swarm.</p></div>
+
+<div class='callout' style='background:rgba(82,146,255,0.08);border-left:3px solid var(--ws);padding:10px 14px;border-radius:6px;font-size:12px;margin:0 0 16px'>
+  <strong>Learning / Building Path</strong><br>
+  The progression is simple: <strong>single agent</strong> → <strong>structured tasks</strong> → <strong>orchestrated work</strong>. If the goal is narrow and clear, one prompt is enough. If the scope is larger, first decompose it into tasks. If it is a recurring or multi-step effort, use Conductor, Operations, or Swarm.
+</div>
+
+<div class='use-case'><div class='uc-label'>Use Case 1 — Single-agent work</div>
+<p><strong>When to use it:</strong> the job is small, specific, and easy to validate. Example: investigate a failing test, explain a config file, or draft a short update.</p>
+</div>
+
+<div class='use-case'><div class='uc-label'>Use Case 2 — Task-based work</div>
+<p><strong>When to use it:</strong> the goal has multiple moving parts but still needs a human in the loop. Example: create a sprint report, update docs, validate edits, and review output before shipping.</p>
+</div>
+
+<div class='use-case'><div class='uc-label'>Use Case 3 — Coordinated multi-agent work</div>
+<p><strong>When to use it:</strong> the job is larger than a single pass: building a feature, writing docs, testing changes, and preparing a summary for review. This is where Conductor, Operations, and Swarm become useful.</p>
+</div>
+
+<div class='demo-label'>Just Show Me — Three Successive Hermes Workflows</div>
+<div class='tabs'>
+<div class='tab-buttons'>
+  <button class='tab-btn ab' data-level='b' onclick="tab(this,'aw-b')">🟢 Beginner</button>
+  <button class='tab-btn' data-level='i' onclick="tab(this,'aw-i')">🟡 Intermediate</button>
+  <button class='tab-btn' data-level='a' onclick="tab(this,'aw-a')">🟣 Advanced</button>
+</div>
+
+<div class='tab-pane active' id='aw-b'>
+<div class='demo'><div class='demo-hd'><span class='role ru'>You — one agent, one job</span><button class='copy-btn' onclick='cp(this)'>Copy</button></div><div class='demo-body'><div class='demo-instruction'><span class='mini-label'>Do this</span><div class='demo-instruction-text'>Use one focused prompt for a short, bounded task.</div></div><div class='demo-prompt'><span class='mini-label'>Paste into chat</span><div class='demo-bd' data-prompt='Review the current repo and tell me which file is the best place to start if I want to understand the app entry point and how it initializes. Keep it brief and point me to the exact file names.'>Review the current repo and tell me which file is the best place to start if I want to understand the app entry point and how it initializes. Keep it brief and point me to the exact file names.</div></div></div>
+</div>
+</div>
+
+<div class='tab-pane' id='aw-i'>
+<div class='demo'><div class='demo-hd'><span class='role ru'>You — break the task down</span><button class='copy-btn' onclick='cp(this)'>Copy</button></div><div class='demo-body'><div class='demo-instruction'><span class='mini-label'>Do this</span><div class='demo-instruction-text'>Use a structured prompt when the work has multiple steps and approvals.</div></div><div class='demo-prompt'><span class='mini-label'>Paste into chat</span><div class='demo-bd' data-prompt='I need to improve this project. Break the goal into 5 concrete tasks with clear owners and dependencies. Put the output into a Kanban-ready list with status labels: Ready, In Progress, Review, Done. Include: what to inspect, what to change, and how to validate each one.'>I need to improve this project. Break the goal into 5 concrete tasks with clear owners and dependencies. Put the output into a Kanban-ready list with status labels: Ready, In Progress, Review, Done. Include: what to inspect, what to change, and how to validate each one.</div></div></div>
+</div>
+</div>
+
+<div class='tab-pane' id='aw-a'>
+<div class='demo'><div class='demo-hd'><span class='role ru'>You — orchestrated mission</span><button class='copy-btn' onclick='cp(this)'>Copy</button></div><div class='demo-body'><div class='demo-instruction'><span class='mini-label'>Do this</span><div class='demo-instruction-text'>Use Conductor or Operations when a job needs parallel work, multiple roles, and checkpointing.</div></div><div class='demo-prompt'><span class='mini-label'>Paste into chat</span><div class='demo-bd' data-prompt='Run a mission to upgrade the project with a small but real improvement: add one meaningful feature, update docs, run validation, and summarize the result. Break the work into parallel streams: builder, reviewer, and docs. Checkpoint after each stage and stop if a task becomes ambiguous or a blocker is found.'>Run a mission to upgrade the project with a small but real improvement: add one meaningful feature, update docs, run validation, and summarize the result. Break the work into parallel streams: builder, reviewer, and docs. Checkpoint after each stage and stop if a task becomes ambiguous or a blocker is found.</div></div></div>
+</div>
+</div>
+</div>
+
+<div class='w-callout'><div class='w-lbl'>🧭 When to move up a level</div>
+<ul>
+  <li><strong>Stay at one-agent mode</strong> when the goal is narrow and you want quick feedback.</li>
+  <li><strong>Move to task mode</strong> when the effort needs sequencing, review, or tracking across multiple edits.</li>
+  <li><strong>Move to orchestration</strong> when the work is large, multi-step, and benefits from parallelism, checkpoints, or worker roles.</li>
+</ul></div>
+
+<div class='pro-tips'><button class='pt-toggle' onclick='pt(this)'>⚡ Pro Tips <span class='arr'>▼</span></button>
+<div class='pt-body'>
+<div class='tip'><span class='i'>⚡</span><span><strong>Don’t over-orchestrate:</strong> if the job fits in one pass, don’t create a mission. The simplest tool is the fastest path.</span></div>
+<div class='tip'><span class='i'>⚡</span><span><strong>Ambiguity is a real signal:</strong> if a task is vague, Hermes should slow down and ask for clarification instead of proceeding with a wrong assumption.</span></div>
+<div class='tip'><span class='i'>⚡</span><span><strong>Use the board for visibility:</strong> when work is multi-step, the Kanban board makes dependencies and handoffs far easier to reason about.</span></div>
+</div></div>
+
+<div class='page-nav'>
+  <a class='prev' href='10-memory-skills.html'><span class='dir'>Previous</span><span class='ttl'>10 · Memory &amp; Skills</span></a>
+  <a class='next' href='11-files-terminal.html'><span class='dir'>Next</span><span class='ttl'>11 · Files &amp; Terminal</span></a>
+</div>
+</main>
+</div>
+<script src='app.js'></script>
+</body>
+</html>

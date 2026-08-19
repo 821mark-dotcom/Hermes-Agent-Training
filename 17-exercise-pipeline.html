@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>17 · Exercise 3 · Full Pipeline — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Exercise 3</div>
+<span class="layer-badge lb2">⚡ Layer 2 · Hermes Agent</span>
+<span class="layer-badge lb3">🖥️ Layer 3 · Hermes Workspace</span>
+<h1>The Full Pipeline</h1>
+<div class="meta"><span class="badge bt">⏱ 25 min</span><span class="badge bi">Intermediate</span><span class="badge ba">Advanced</span></div>
+
+<div class="use-case" style="margin-bottom:16px"><div class="uc-label">🎯 Exercise Goal</div>
+<p>Configure a team in Operations, route a mission through Swarm's worker dispatch, and use the Dashboard Kanban as your command center — watching tasks move from Triage through to Done as your specialist agents pick them up in sequence. This exercise connects every component you've learned into one end-to-end workflow.</p></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>You're the project manager. Operations is where you build your team (who the agents are and what they're good at). Swarm is how you send a mission to the whole team at once. The Kanban board is the project tracker you keep open on a second screen — it shows every task, who's working on it, what they found, and what's next. In this exercise you set up all three and let them talk to each other.</p></div>
+
+<div class="callout" style="background:rgba(232,160,32,0.12);border-left:3px solid var(--hermes);padding:10px 14px;border-radius:6px;font-size:12px;margin-bottom:16px">
+  <strong>⚡ Pre-requisites — confirm before starting:</strong>
+  <ul style="margin:6px 0 0;padding-left:16px">
+    <li>Section 14 profile bootstrap complete: <code>hermes profile list</code> shows researcher, writer, reviewer, builder</li>
+    <li>Gateway running: <code>hermes gateway start</code> (check <code>localhost:9119</code>)</li>
+    <li>Workspace running: <code>localhost:3000</code> loads without error</li>
+    <li>Board is empty or clean: archive any tasks from previous exercises</li>
+  </ul>
+</div>
+
+<div class="callout" style="background:rgba(78,201,176,0.08);border-left:3px solid var(--l1);padding:10px 14px;border-radius:6px;font-size:12px;margin-bottom:16px">
+  <strong>📋 Expected Output:</strong> Operations shows at least 2 active agent sessions. Swarm routes a mission to 2+ parallel workers. Dashboard Kanban shows a task graph with parent-child links. At least 1 worker completes its task and the completion summary is visible in the next task's context.
+</div>
+
+<h2>Phase 1 — Verify Your Team in Operations</h2>
+<ol class="steps">
+  <li><strong>Open Operations in Hermes Workspace</strong><br>Navigate to <code>localhost:3000/operations</code>. You'll see the agent roster grid. If it shows "Needs setup" flags, the profiles don't have their gateway started. Note which profiles are available.</li>
+  <li><strong>Confirm profile descriptions via Dashboard Kanban Orchestration Settings</strong><br>Open <code>localhost:9119/kanban</code> → click <strong>▸ Orchestration settings</strong>. You'll see each profile with its description. Verify researcher, writer, reviewer, and builder each have a non-empty description. If any is missing, add it here (inline editor — click the profile name).</li>
+  <li><strong>Launch a test agent from Operations</strong><br>In Workspace Operations → click <strong>New Agent</strong> → select <strong>Sage</strong> (or researcher). Give it a quick test prompt:
+    <div class="demo" style="margin-top:8px"><div class="demo-hd"><span class="role ru">Operations — test prompt</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-bd" data-prompt="List the 3 most important recent developments in AI agent tooling. One sentence each. Use your web search tool.">List the 3 most important recent developments in AI agent tooling. One sentence each. Use your web search tool.</div></div>
+    Watch it appear in the Overview grid with a live status indicator. This confirms Operations → agent spawning is working before you go bigger.</li>
+</ol>
+
+<h2>Phase 2 — Route a Mission Through Swarm</h2>
+<ol class="steps" start="4">
+  <li><strong>Open Swarm in Hermes Workspace</strong><br>Navigate to <code>localhost:3000/swarm</code>. You'll see the <strong>Control</strong>, <strong>Board</strong>, <strong>Inbox</strong>, and <strong>Runtime</strong> tabs. The Control tab has the mission input and routing mode selector.</li>
+  <li><strong>Configure the Swarm mission</strong><br>In the Control tab, use this mission (or write your own):
+    <div class="demo" style="margin-top:8px"><div class="demo-hd"><span class="role ru">Swarm — Mission Input</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-bd" data-prompt="Produce a competitive intelligence brief on the top 3 open-source AI agent frameworks (excluding Hermes). For each: summarize key features, target use case, and one strength vs one weakness. Then synthesize a final 1-paragraph recommendation on where Hermes Agent is differentiated.">Produce a competitive intelligence brief on the top 3 open-source AI agent frameworks (excluding Hermes). For each: summarize key features, target use case, and one strength vs one weakness. Then synthesize a final 1-paragraph recommendation on where Hermes Agent is differentiated.</div></div></li>
+  <li><strong>Set routing mode and launch</strong><br>Select routing mode <strong>Auto</strong> (lets Swarm choose which workers to engage). Click <strong>Route Mission</strong>. Swarm creates a task graph: parallel worker tasks for each framework → a synthesis task that waits for all workers to complete.</li>
+  <li><strong>Watch the Board tab update</strong><br>Switch to the <strong>Board</strong> tab in Swarm. You'll see the worker tasks and their statuses. Switch to <strong>Runtime</strong> to see live worker activity logs.</li>
+</ol>
+
+<h2>Phase 3 — Monitor via Dashboard Kanban</h2>
+<ol class="steps" start="7">
+  <li><strong>Open Dashboard Kanban as your command center</strong><br>Open <code>localhost:9119/kanban</code> in a separate browser tab (or window). This is your live project view. You should see the tasks Swarm created: worker tasks in Ready or In Progress, the synthesis task in Todo (waiting on all workers).</li>
+  <li><strong>Inspect a running worker's context</strong><br>Find a task that's In Progress. Open its drawer. Scroll down to the event timeline. You'll see <em>spawned</em>, <em>heartbeat</em> events as the worker runs. Click the task ID to get the full id, then from terminal:
+    <div class="demo" style="margin-top:8px"><div class="demo-hd"><span class="role ru">Terminal — watch live events</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-bd" data-prompt="hermes kanban tail &lt;task_id&gt;">hermes kanban tail &lt;task_id&gt;</div></div>
+    <p style="font-size:12px;margin-top:6px"><code>kanban tail</code> streams all events for that task in real-time: spawned → heartbeat → completed (or blocked).</p></li>
+  <li><strong>Watch the synthesis task unlock</strong><br>When the first worker tasks move to Done, watch the synthesis task auto-promote from Todo → Ready in the Kanban board. This is the parent-link dependency gate in action — no human triggered it. The dispatcher picks it up on the next tick (click Nudge to force it now).</li>
+  <li><strong>Inspect the handoff — what did the synthesis worker receive?</strong><br>After the synthesis task moves to Ready, run:
+    <div class="demo" style="margin-top:8px"><div class="demo-hd"><span class="role ru">Terminal — see the handoff context</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-bd" data-prompt="hermes kanban context &lt;synthesis_task_id&gt;">hermes kanban context &lt;synthesis_task_id&gt;</div></div>
+    <p style="font-size:12px;margin-top:6px">You'll see the <code>## Parent task results</code> section populated with each completed worker's summary and metadata. This is the exact context the synthesis agent will start with — no explicit prompt engineering needed.</p></li>
+</ol>
+
+<div class="use-case" style="margin-top:20px"><div class="uc-label">Real-World Use Case Examples</div>
+<div class="grid grid2">
+  <div class="card"><h4>Overnight Code Review Sprint</h4><p style="font-size:12px">Configure 4+ reviewer workers in Operations. Route all open PRs as Swarm tasks. Workers run overnight — each reviews one PR, leaves a <code>kanban_complete(summary, metadata)</code> with findings. A Scribe worker synthesizes a morning report. You wake up to a Done board and a summary in your inbox.</p></div>
+  <div class="card"><h4>Multi-Repo Documentation Refresh</h4><p style="font-size:12px">Swarm routes one task per repo to a builder worker (update docs) and one to a reviewer (check accuracy). Each reviewer task is a child of its builder sibling. A writer synthesizes the overall changelog when all repos are done. Kanban shows the progress across all repos in one view.</p></div>
+  <div class="card"><h4>Automated QA Pass</h4><p style="font-size:12px">Triage worker decomposes a test suite into individual test-file tasks. Builder workers run each in parallel. Reviewer worker gates on all builders completing — checks for flakes and regressions. Ops worker updates CI configuration. Full pipeline visible on the Kanban board throughout.</p></div>
+  <div class="card"><h4>Competitive Intelligence Loop</h4><p style="font-size:12px">Same as this exercise but on a cron. Weekly: Swarm kicks off 3 parallel researcher tasks (one per competitor), a writer synthesizes findings, a reviewer approves before the brief goes to your Slack via the messaging gateway.</p></div>
+</div></div>
+
+<div class="demo-label" style="margin-top:20px">Advanced: Build the Same Pipeline via CLI</div>
+<div class="tabs">
+<div class="tab-buttons">
+  <button class="tab-btn ai" data-level="i" onclick="tab(this,'ex3-i')">🟡 Swarm CLI</button>
+  <button class="tab-btn" data-level="a" onclick="tab(this,'ex3-a')">🟣 Manual Pipeline</button>
+</div>
+<div class="tab-pane active" id="ex3-i">
+<div class="demo"><div class="demo-hd"><span class="role ru">Terminal — Kanban Swarm v1 topology in one command</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="hermes kanban swarm &quot;Competitive intelligence brief: top 3 open-source AI agent frameworks&quot; \
+  --worker researcher:&quot;Research AutoGPT — features, use cases, strengths, weaknesses&quot; \
+  --worker researcher:&quot;Research CrewAI — features, use cases, strengths, weaknesses&quot; \
+  --worker researcher:&quot;Research LangGraph — features, use cases, strengths, weaknesses&quot; \
+  --verifier reviewer \
+  --synthesizer writer">hermes kanban swarm "Competitive intelligence brief: top 3 open-source AI agent frameworks" \
+  --worker researcher:"Research AutoGPT — features, use cases, strengths, weaknesses" \
+  --worker researcher:"Research CrewAI — features, use cases, strengths, weaknesses" \
+  --worker researcher:"Research LangGraph — features, use cases, strengths, weaknesses" \
+  --verifier reviewer \
+  --synthesizer writer</div></div></div>
+<p style="font-size:12px;margin-top:6px">Creates an atomic graph: 3 parallel researcher tasks → 1 reviewer (waits for all 3) → 1 writer/synthesizer (waits for reviewer sign-off). Then watch it run: <code>hermes kanban watch</code></p>
+</div>
+<div class="tab-pane" id="ex3-a">
+<div class="demo"><div class="demo-hd"><span class="role ru">Terminal — Manual P2 pipeline (full control)</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="# Parallel research workers (fan-out)
+T1=$(hermes kanban create &quot;Research AutoGPT capabilities&quot; --assignee researcher --json | jq -r .task_id)
+T2=$(hermes kanban create &quot;Research CrewAI capabilities&quot; --assignee researcher --json | jq -r .task_id)
+T3=$(hermes kanban create &quot;Research LangGraph capabilities&quot; --assignee researcher --json | jq -r .task_id)
+
+# Review gate — waits for all 3 research tasks
+T_REV=$(hermes kanban create &quot;Review research findings for accuracy&quot; \
+    --assignee reviewer --parent $T1 --parent $T2 --parent $T3 --json | jq -r .task_id)
+
+# Final synthesis — waits for review sign-off
+hermes kanban create &quot;Write competitive intelligence brief&quot; \
+    --assignee writer --parent $T_REV
+
+# Watch the pipeline run
+hermes kanban watch"># Parallel research workers (fan-out)
+T1=$(hermes kanban create "Research AutoGPT capabilities" --assignee researcher --json | jq -r .task_id)
+T2=$(hermes kanban create "Research CrewAI capabilities" --assignee researcher --json | jq -r .task_id)
+T3=$(hermes kanban create "Research LangGraph capabilities" --assignee researcher --json | jq -r .task_id)
+
+# Review gate — waits for all 3 research tasks
+T_REV=$(hermes kanban create "Review research findings for accuracy" \
+    --assignee reviewer --parent $T1 --parent $T2 --parent $T3 --json | jq -r .task_id)
+
+# Final synthesis — waits for review sign-off
+hermes kanban create "Write competitive intelligence brief" \
+    --assignee writer --parent $T_REV
+
+# Watch the pipeline run
+hermes kanban watch</div></div></div>
+</div>
+</div>
+
+<div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>Operations and Swarm are both front doors to the same Kanban machinery.</strong> Operations is for manually launching named agents with explicit tasks. Swarm is for routing a mission to a pre-defined topology. Both create tasks on the same board — you can use both in the same workflow.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>The synthesis agent doesn't need special instructions.</strong> Because it receives each parent's <code>summary + metadata</code> automatically via the parent link, it already has the research findings in context when it starts. A clear task title and body is usually enough.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Block a task to add human input mid-pipeline.</strong> If the reviewer worker blocks a task, it stays in Blocked until you add a comment with the clarification it needs, then click Unblock. The worker will pick it up on the next tick and read your comment as part of its context.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Use <code>hermes kanban runs &lt;task_id&gt;</code> for post-mortems.</strong> After the pipeline completes, each task has a full attempt history: which profile ran it, how long it took, what the outcome was, and the structured handoff metadata. This is your audit trail.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="16-exercise-conductor.html"><span class="dir">Previous</span><span class="ttl">16 · Exercise 2 · Mission to Board</span></a>
+  <a class="next" href="appendix-quick-ref.html"><span class="dir">Next</span><span class="ttl">Appendix · Quick Reference</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

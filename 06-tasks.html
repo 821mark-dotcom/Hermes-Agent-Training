@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>06 · Tasks (Kanban) — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Section 06</div>
+<span class="layer-badge lb3">🖥️ Layer 3 · Hermes Workspace</span>
+<h1>Tasks (Kanban) — The Workspace Task Board</h1>
+<div class="meta"><span class="badge bt">⏱ 12 min</span><span class="badge bb">Beginner</span><span class="badge bi">Intermediate</span><span class="badge ba">Advanced</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>Tasks is the Kanban board for Hermes Workspace — the main visual task board where you create cards, drag them across columns, and watch agents pick them up. The same underlying board is also accessible from Hermes Agent via the CLI and dashboard commands, but the Workspace UI is the primary front door. It is the bridge between "things to do" and "agent doing them." Columns: Triage → Ready → Running → Review → Done.</p></div>
+
+<div class="w-callout"><div class="w-lbl">🖥️ Hermes Workspace — Tasks page</div>
+<ul>
+  <li><strong>Triage</strong> — new tasks waiting to be specified or decomposed</li>
+  <li><strong>Ready</strong> — tasks with enough detail for an agent to start</li>
+  <li><strong>Running</strong> — agent actively working on the task</li>
+  <li><strong>Review</strong> — agent finished; waiting for human review</li>
+  <li><strong>Done</strong> — completed and accepted</li>
+  <li><strong>Drag to move</strong> — change status by dragging cards between columns</li>
+  <li><strong>New Task</strong> — button (top right) or <code>hermes kanban create</code> from CLI</li>
+</ul></div>
+
+<div class="h-callout"><div class="h-lbl">⚡ Hermes Agent — Kanban via CLI (same board)</div>
+<div class="demo"><div class="demo-hd"><span class="role ru">Terminal — manage tasks from CLI</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="hermes kanban list                    # see all tasks
+hermes kanban create 'Fix auth bug'   # add a task
+hermes kanban dispatch                # run one dispatcher pass (assigns ready tasks to agents)">hermes kanban list                    # see all tasks
+hermes kanban create 'Fix auth bug'   # add a task
+hermes kanban dispatch                # run one dispatcher pass (assigns ready tasks to agents)</div></div></div></div>
+
+<div class="ss-wrap">
+  <img src="screenshots/ws-tasks.png" alt="Hermes Workspace Tasks Kanban Board">
+  <div class="ss-cap"><div class="dot" style="background:var(--ws)"></div><span>Hermes Workspace · Tasks · Triage / Ready / Running / Review columns. "Workspace Tasks is a lightweight task board. Use Dashboard Kanban for native multi-board controls."</span></div>
+</div>
+
+<div class="use-case"><div class="uc-label">Use Case — Sprint Planning with Agent Dispatch</div>
+<p>You have 10 tickets from your backlog. Drop them all into Triage. Hermes decomposes and specifies each one, moves them to Ready, then dispatches agent workers to handle them — while you work on other things.</p></div>
+
+<div class="callout" style="background:rgba(71,167,115,0.08);border-left:3px solid var(--green);padding:10px 14px;border-radius:6px;font-size:12px;margin:0 0 16px">
+  <strong>Learning / Building Path</strong><br>
+  <strong>Start here:</strong> <strong>Tasks</strong> is the first mode to learn. It teaches the lifecycle: Triage → Ready → Running → Review → Done. <strong>Then:</strong> one small Conductor mission. <strong>Then:</strong> Operations. <strong>Finally:</strong> Swarm when you want autonomous background work.
+  <br><br>
+  <strong>Beginner combo:</strong> gateway running + 1–2 simple kanban cards + one Builder/Lite agent in Operations. <strong>Intermediate:</strong> 2–3 agents or a single Conductor mission with concrete constraints. <strong>Advanced:</strong> multi-agent operations + swarm + tighter model/profile configuration.
+</div>
+
+<ol class="steps">
+  <li>Open Tasks in Hermes Workspace (<code>localhost:3000/tasks</code>)</li>
+  <li>Click <strong>New Task</strong> — add a title and description for each ticket</li>
+  <li>Tasks start in <strong>Triage</strong> — Hermes will auto-specify them (decompose into a concrete spec)</li>
+  <li>Once specified, tasks move to <strong>Ready</strong> — ready for agent pickup</li>
+  <li>Run <code>hermes kanban dispatch</code> in terminal to assign Ready tasks to agents</li>
+  <li>Watch tasks move to <strong>Running</strong> as agents work them</li>
+  <li>Completed tasks land in <strong>Review</strong> — inspect, approve, or request changes</li>
+</ol>
+
+<div class="demo-label">Just Show Me — Working the Board</div>
+<div class="tabs">
+<div class="tab-buttons">
+  <button class="tab-btn ab" data-level="b" onclick="tab(this,'tk-b')">🟢 Beginner</button>
+  <button class="tab-btn" data-level="i" onclick="tab(this,'tk-i')">🟡 Intermediate</button>
+  <button class="tab-btn" data-level="a" onclick="tab(this,'tk-a')">🟣 Advanced</button>
+</div>
+<div class="tab-pane active" id="tk-b">
+<p style="font-size:12px;color:var(--text-muted);margin-bottom:8px">Create a task from Workspace Chat, then find it on the board:</p>
+<div class="demo"><div class="demo-hd"><span class="role ru">You — in Workspace Chat</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Add a task to the kanban board: 'Write unit tests for the authentication module'. Set priority to High.">Add a task to the kanban board: 'Write unit tests for the authentication module'. Set priority to High.</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ru">You — check the board</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="List all tasks on the board. For each one, show its status and priority.">List all tasks on the board. For each one, show its status and priority.</div></div></div>
+</div>
+<div class="tab-pane" id="tk-i">
+<p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">These five tasks are not executed in a fixed left-to-right sequence. Hermes evaluates all Ready tasks and dispatches them to available agent profiles as capacity allows; multiple tasks can run in parallel, and dependency-gated tasks wait until their prerequisites complete.</p>
+<div class="demo"><div class="demo-hd"><span class="role ru">You — bulk load + dispatch</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Add these 5 tasks to the kanban board, all starting in Triage:
+1. Refactor the database connection pool
+2. Add rate limiting to the API endpoints
+3. Write integration tests for the payment flow
+4. Update README with new environment variables
+5. Fix the date formatting bug in the reporting module
+
+Then run a dispatcher pass to decompose and specify each one.">Add these 5 tasks to the kanban board, all starting in Triage:
+1. Refactor the database connection pool
+2. Add rate limiting to the API endpoints
+3. Write integration tests for the payment flow
+4. Update README with new environment variables
+5. Fix the date formatting bug in the reporting module
+
+Then run a dispatcher pass to decompose and specify each one.</div></div></div>
+</div>
+<div class="tab-pane" id="tk-a">
+<div class="demo"><div class="demo-hd"><span class="role ru">You — multi-board with profiles</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Create a new kanban board called 'q4-sprint'. Add 3 tasks to it. Then show me all boards and their task counts. Finally, run a full dispatcher pass on the q4-sprint board — assign each Ready task to the appropriate agent profile (builder for code tasks, scribe for docs, ops for infra).">Create a new kanban board called 'q4-sprint'. Add 3 tasks to it. Then show me all boards and their task counts. Finally, run a full dispatcher pass on the q4-sprint board — assign each Ready task to the appropriate agent profile (builder for code tasks, scribe for docs, ops for infra).</div></div></div>
+</div>
+</div>
+
+<div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>Tasks vs Jobs:</strong> Tasks are for tracked work with a lifecycle (Triage→Done). Jobs are fire-and-forget one-shot runs. Use Tasks for anything you want to track across sessions.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Ambiguous tasks should pause:</strong> If a task is too generic (for example, <code>Refactor the file</code>), Hermes should ask for the missing file, scope, or success criteria instead of guessing. In a Kanban workflow, that usually means the card sits in Triage or Blocked until the missing detail is added. You can tell it is waiting because it does not advance to Ready/Running and no worker picks it up.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Where to define safeguards:</strong> The clearest place is at the prompt/task level: tell Hermes exactly what file, what goal, what not to touch, and how to know it is done. You can also embed durable context in memory, profile instructions, or reusable skills so repeated tasks default to the right constraints. These are safeguards in addition to simply specifying a clear task + context.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Multi-board:</strong> For larger projects, create separate boards per project using <code>hermes kanban boards create</code>. The Workspace UI currently shows the default board — use CLI for multi-board switching.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Auto-decompose:</strong> With <code>kanban.auto_decompose: true</code> in config, Hermes automatically fans Triage tasks into subtask graphs every dispatcher tick. No manual dispatch needed.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="05-jobs.html"><span class="dir">Previous</span><span class="ttl">05 · Jobs</span></a>
+  <a class="next" href="07-conductor.html"><span class="dir">Next</span><span class="ttl">07 · Conductor</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

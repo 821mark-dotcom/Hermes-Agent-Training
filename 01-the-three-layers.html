@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>01 · The Three Layers — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Section 01</div>
+<h1>The Three Layers — How It All Fits Together</h1>
+<div class="meta"><span class="badge bt">⏱ 8 min</span><span class="badge bb">Beginner</span><span class="badge bi">Intermediate</span><span class="badge ba">Advanced</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>Three floors of a building. <strong>Floor 1:</strong> VS Code + Copilot — where most developers already live. <strong>Floor 2:</strong> Hermes Agent adds a persistent brain that remembers, runs on a schedule, and answers from your phone. It is the agent runtime, not the visual task board. <strong>Floor 3:</strong> Hermes Workspace gives that brain a visual command center with Kanban, jobs, swarm, and orchestration tools. You can stop at any floor. Move up when you're ready.</p></div>
+
+<div style="margin:20px 0;border-radius:8px;overflow:hidden">
+  <div style="background:rgba(124,156,245,.1);border:2px solid var(--wborder);border-bottom:none;padding:18px 20px">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--ws);margin-bottom:5px">🖥️ Layer 3 · Hermes Workspace · localhost:3000</div>
+    <div style="font-size:14px;color:var(--text-bright);font-weight:600;margin-bottom:3px">Your agent's command center</div>
+    <div style="font-size:12px;color:var(--text-muted)">Chat · Conductor · Operations · Swarm · Tasks · Jobs · Memory · Skills · Files · Dashboard · MCP</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 12px;margin-top:10px;font-size:11px;">
+      <a href="http://localhost:3000/" target="_blank" rel="noreferrer" style="color:var(--text-bright);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);">Hermes Workspace</a>
+    </div>
+  </div>
+  <div style="background:rgba(232,160,32,.08);border:2px solid var(--hborder);border-bottom:none;padding:18px 20px">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--hermes);margin-bottom:5px">⚡ Layer 2 · Hermes Agent · Web UI :9119 · Gateway :8642</div>
+    <div style="font-size:14px;color:var(--text-bright);font-weight:600;margin-bottom:3px">Autonomous agent brain</div>
+    <div style="font-size:12px;color:var(--text-muted)">Persistent memory · 2,000+ skills · 20+ messaging platforms · cron automations · parallel subagents</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 12px;margin-top:10px;font-size:11px;">
+      <a href="http://localhost:9119/" target="_blank" rel="noreferrer" style="color:var(--text-bright);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);">Hermes Agent</a>
+      <a href="http://localhost:8642/" target="_blank" rel="noreferrer" style="color:var(--text-bright);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);">Gateway</a>
+    </div>
+  </div>
+  <div style="background:rgba(78,201,176,.06);border:2px solid var(--l1border);padding:18px 20px">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--l1);margin-bottom:5px">💻 Layer 1 · Vibe-Coding Foundation</div>
+    <div style="font-size:14px;color:var(--text-bright);font-weight:600;margin-bottom:3px">VS Code + GitHub Copilot / Claude</div>
+    <div style="font-size:12px;color:var(--text-muted)">Inline completions · chat panel · workspace context · file edits · basic agent mode</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 12px;margin-top:10px;font-size:11px;">
+      <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer" style="color:var(--text-bright);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);">VS Code</a>
+      <a href="https://claude.ai/" target="_blank" rel="noreferrer" style="color:var(--text-bright);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);">Claude</a>
+    </div>
+  </div>
+</div>
+
+<div class="info"><span>ℹ️</span><span><strong>All three layers are independent and concurrent.</strong> Use Layer 1 alone — it works perfectly. Add Layer 2 when you want persistence, scheduling, or mobile access via the Hermes Agent runtime and web UI. Add Layer 3 when you want the full visual command center: Conductor, Operations, Swarm, Kanban, jobs, and live dashboards. Each augments, never replaces, what came before.</span></div>
+
+<h2>What each layer gives you</h2>
+<div class="grid grid3" style="margin-bottom:20px">
+  <div class="card" style="border-top:3px solid var(--l1)"><div style="font-size:11px;font-weight:700;color:var(--l1);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Layer 1 gives you</div><ul><li>Inline code completions</li><li>Chat panel in VS Code</li><li>File &amp; workspace context</li><li>Basic agentic edits</li><li>Prompt templates (.prompt.md)</li></ul></div>
+  <div class="card" style="border-top:3px solid var(--hermes)"><div style="font-size:11px;font-weight:700;color:var(--hermes);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Layer 2 adds</div><ul><li>Memory across sessions</li><li>2,000+ reusable skills</li><li>Runs while you're away</li><li>Telegram / Slack / 20+ platforms</li><li>Cron-scheduled automations</li><li>Parallel subagents</li><li>Own Web UI at :9119</li></ul></div>
+  <div class="card" style="border-top:3px solid var(--ws)"><div style="font-size:11px;font-weight:700;color:var(--ws);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Layer 3 adds</div><ul><li>Mission orchestration (Conductor)</li><li>Multi-agent Operations console</li><li>Swarm + Kanban task board</li><li>Jobs queue &amp; monitoring</li><li>Live tool call visualization</li><li>Memory browser &amp; live editor</li><li>Cost / session / model dashboard</li></ul></div>
+</div>
+
+<div class="h-callout"><div class="h-lbl">⚡ Layer 2 — Start Hermes Agent (two services)</div>
+<div class="demo"><div class="demo-hd"><span class="role ru">Terminal 1 · Gateway · :8642</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="hermes gateway run      # chat, models, streaming, jobs, tools">hermes gateway run      # chat, models, streaming, jobs, tools</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ru">Terminal 2 · Dashboard Web UI · :9119</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="hermes dashboard        # sessions, skills, config, MCP — opens browser UI">hermes dashboard        # sessions, skills, config, MCP — opens browser UI</div></div></div>
+<p style="margin-top:8px;font-size:12px">Verify: <code>curl localhost:8642/health</code> → <span style="color:var(--green)">ok</span> &nbsp;|&nbsp; <code>curl localhost:9119/api/status</code> → <span style="color:var(--green)">ok</span></p></div>
+
+<div class="w-callout"><div class="w-lbl">🖥️ Layer 3 — Add Hermes Workspace</div>
+<div class="demo"><div class="demo-hd"><span class="role ru">Terminal 3 · Workspace · :3000</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="cd ~/hermes-workspace && pnpm dev
+# shortcut: pnpm start:all  ← launches all 3 services at once">cd ~/hermes-workspace && pnpm dev
+# shortcut: pnpm start:all  ← launches all 3 services at once</div></div></div></div>
+
+<div class="pro-tips" style="margin-top:16px"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>Start with Layer 1 first.</strong> Get one clean conversation working before adding the gateway, workspace, or any other features.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>hermes doctor</strong> is your first debug step at any layer — it diagnoses config issues, missing keys, and service state in seconds.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Profiles are isolated:</strong> each Hermes profile has its own config, sessions, and skills. Use profiles to separate work/personal or different projects.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="index.html"><span class="dir">Back</span><span class="ttl">Overview</span></a>
+  <a class="next" href="02-getting-started.html"><span class="dir">Next</span><span class="ttl">02 · Getting Started</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

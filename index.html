@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hermes Training Guide</title><link rel="stylesheet" href="style.css">
+<style>
+.hero{padding:32px;background:linear-gradient(135deg,#252526,#1e1e1e);border:1px solid var(--border);border-radius:8px;margin-bottom:32px;}
+.hero-badge{display:inline-block;padding:3px 10px;background:var(--accent);border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;color:#fff;}
+.hero h1{font-size:26px;font-weight:700;color:var(--text-bright);margin-bottom:10px;}
+.hero p{color:var(--text-muted);font-size:14px;max-width:580px;margin-bottom:20px;}
+.stats{display:flex;gap:28px;flex-wrap:wrap;}
+.stat .v{font-size:22px;font-weight:700;color:var(--blue);}
+.stat .l{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;}
+.layer-stack{margin:20px 0;border-radius:8px;overflow:hidden;}
+.ls-row{padding:16px 20px;border:2px solid transparent;}
+.ls-l3{background:rgba(124,156,245,.1);border-color:var(--wborder);border-bottom:none;}
+.ls-l2{background:rgba(232,160,32,.08);border-color:var(--hborder);border-bottom:none;}
+.ls-l1{background:rgba(78,201,176,.06);border-color:var(--l1border);}
+.ls-row .lt{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px;}
+.ls-row .lh{font-size:14px;font-weight:600;color:var(--text-bright);margin-bottom:3px;}
+.ls-row .ld{font-size:12px;color:var(--text-muted);}
+.ls-links{display:flex;flex-wrap:wrap;gap:8px 12px;margin-top:10px;font-size:11px;}
+.ls-links a{color:var(--text-bright);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);}
+.ls-links a:hover{color:var(--blue);border-color:var(--blue);}
+.section-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;}
+.sec-card{display:block;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:16px;transition:border-color .12s;}
+.sec-card:hover{border-color:var(--blue-dark);}
+.sec-card .sn{font-size:10px;color:var(--text-muted);font-weight:700;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;}
+.sec-card h3{font-size:14px;font-weight:600;color:var(--text-bright);margin-bottom:4px;}
+.sec-card p{font-size:12px;color:var(--text-muted);line-height:1.5;}
+.sec-card .lbadge{font-size:9px;padding:1px 6px;border-radius:8px;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="hero">
+  <div class="hero-badge">Full Curriculum v2</div>
+  <h1>Hermes Agent &amp; Workspace<br>Interactive Training Guide</h1>
+  <p>Real screenshots. Source-verified content. Scripted copy-paste demos. Jump in anywhere — each section is self-contained.</p>
+  <div class="stats">
+    <div class="stat"><div class="v">13</div><div class="l">Sections</div></div>
+    <div class="stat"><div class="v">~2.5h</div><div class="l">Total</div></div>
+    <div class="stat"><div class="v">3</div><div class="l">Layers</div></div>
+    <div class="stat"><div class="v">50+</div><div class="l">Demo Prompts</div></div>
+  </div>
+</div>
+
+<div class="eli10" style="margin-bottom:24px">
+  <div class="lbl">ELI10 — The Whole Thing in One Paragraph</div>
+  <p>There are three layers. <strong>Layer 1</strong> is vibe-coding: VS Code + Copilot, prompts, inline edits. <strong>Layer 2</strong> is Hermes Agent: an autonomous agent with persistent memory, 2,000+ skills, and access from Telegram or Slack. It does not include the Kanban board. <strong>Layer 3</strong> is Hermes Workspace: the browser-based command center with mission control, Kanban, jobs, swarm, and a live multi-agent dashboard. Each layer works independently. Each makes the layer below more powerful.</p>
+</div>
+
+<div class="layer-stack">
+  <div class="ls-row ls-l3"><div class="lt" style="color:var(--ws)">🖥️ Layer 3 · Hermes Workspace · localhost:3000</div><div class="lh">Your agent's command center</div><div class="ld">Chat · Conductor · Operations · Swarm · Tasks · Jobs · Memory · Skills · Files · Dashboard · MCP</div><div class="ls-links"><a href="http://localhost:3000/" target="_blank" rel="noreferrer">Hermes Workspace</a></div></div>
+  <div class="ls-row ls-l2"><div class="lt" style="color:var(--hermes)">⚡ Layer 2 · Hermes Agent · Web UI :9119 · Gateway :8642</div><div class="lh">Autonomous agent brain</div><div class="ld">Persistent memory · 2,000+ skills · 20+ messaging platforms · cron automations · parallel subagents</div><div class="ls-links"><a href="http://localhost:9119/" target="_blank" rel="noreferrer">Hermes Agent</a><a href="http://localhost:8642/" target="_blank" rel="noreferrer">Gateway</a></div></div>
+  <div class="ls-row ls-l1"><div class="lt" style="color:var(--l1)">💻 Layer 1 · Vibe-Coding Foundation</div><div class="lh">VS Code + GitHub Copilot / Claude</div><div class="ld">Inline completions · chat panel · workspace context · file edits · prompt templates</div><div class="ls-links"><a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer">VS Code</a><a href="https://claude.ai/" target="_blank" rel="noreferrer">Claude</a></div></div>
+</div>
+
+<div class="info"><span>ℹ️</span><span><strong>All three layers are independent and can run concurrently.</strong> Stop at any layer. Each augments — never replaces — what came before.</span></div>
+
+<h2 style="margin-top:32px">Curriculum</h2>
+<div class="section-grid">
+  <a class="sec-card" href="01-the-three-layers.html"><div class="sn"><span>01 · 8 min</span><span class="lbadge" style="background:rgba(78,201,176,.15);color:var(--l1)">L1+2+3</span></div><h3>The Three Layers</h3><p>Architecture overview, what each layer adds, startup commands.</p></a>
+  <a class="sec-card" href="02-getting-started.html"><div class="sn"><span>02 · 10 min</span><span class="lbadge" style="background:var(--hbg);color:var(--hermes)">Layer 2</span></div><h3>Getting Started</h3><p>Install Hermes Agent, hermes setup, first chat, verify sessions.</p></a>
+  <a class="sec-card" href="03-hermes-agent-web-ui.html"><div class="sn"><span>03 · 10 min</span><span class="lbadge" style="background:var(--hbg);color:var(--hermes)">Layer 2</span></div><h3>Hermes Agent Web UI</h3><p>The built-in dashboard at :9119 — Chat, Sessions, Models, Config, Keys.</p></a>
+  <a class="sec-card" href="04-dashboard.html"><div class="sn"><span>04 · 8 min</span><span class="lbadge" style="background:var(--wbg);color:var(--ws)">Layer 3</span></div><h3>Workspace Dashboard</h3><p>One of the key Workspace-only features: live operations, cost, sessions, attention alerts, and status.</p></a>
+  <a class="sec-card" href="04-workspace-chat.html"><div class="sn"><span>05 · 8 min</span><span class="lbadge" style="background:var(--wbg);color:var(--ws)">Layer 3</span></div><h3>Workspace Chat</h3><p>Multi-model chat, live tool cards, Agent View, session persistence.</p></a>
+  <a class="sec-card" href="05-jobs.html"><div class="sn"><span>06 · 10 min</span><span class="lbadge" style="background:var(--wbg);color:var(--ws)">Layer 3</span></div><h3>Jobs</h3><p>Queued agent work — create, monitor, and inspect job runs.</p></a>
+  <a class="sec-card" href="06-tasks.html"><div class="sn"><span>07 · 12 min</span><span class="lbadge" style="background:var(--wbg);color:var(--ws)">Layer 3</span></div><h3>Tasks (Kanban)</h3><p>Drag-and-drop task board: Triage → Ready → Running → Review → Done.</p></a>
+  <a class="sec-card" href="07-conductor.html"><div class="sn"><span>08 · 15 min</span><span class="lbadge" style="background:var(--wbg);color:var(--ws)">Layer 3</span></div><h3>Conductor</h3><p>Mission control: describe a goal, watch a team of agents build it.</p></a>
+  <a class="sec-card" href="08-operations.html"><div class="sn"><span>09 · 12 min</span><span class="lbadge" style="background:var(--wbg);color:var(--ws)">Layer 3</span></div><h3>Operations</h3><p>Multi-agent management with preset profiles: Sage, Builder, Scribe, Ops.</p></a>
+  <a class="sec-card" href="09-swarm.html"><div class="sn"><span>10 · 15 min</span><span class="lbadge" style="background:var(--wbg);color:var(--ws)">Layer 3</span></div><h3>Swarm Mode</h3><p>Persistent tmux workers with role dispatch. Overnight autonomous sprints.</p></a>
+  <a class="sec-card" href="10-memory-skills.html"><div class="sn"><span>11 · 10 min</span><span class="lbadge" style="background:var(--hbg);color:var(--hermes)">Layer 2</span></div><h3>Memory &amp; Skills</h3><p>FTS5 cross-session memory, 2,000+ skills, curator, SOUL.md.</p></a>
+  <a class="sec-card" href="10a-agents-working.html"><div class="sn"><span>11A · 8 min</span><span class="lbadge" style="background:var(--wbg);color:var(--ws)">Layer 3</span></div><h3>Agents Working</h3><p>Three successive Hermes use cases: solo, structured, and orchestrated work.</p></a>
+  <a class="sec-card" href="11-files-terminal.html"><div class="sn"><span>12 · 8 min</span><span class="lbadge" style="background:var(--wbg);color:var(--ws)">Layer 3</span></div><h3>Files &amp; Terminal</h3><p>Monaco editor and browser PTY terminal inside Hermes Workspace.</p></a>
+  <a class="sec-card" href="12-messaging-gateway.html"><div class="sn"><span>13 · 10 min</span><span class="lbadge" style="background:var(--hbg);color:var(--hermes)">Layer 2</span></div><h3>Messaging Gateway</h3><p>Connect 20+ platforms: Telegram, Slack, Discord, WhatsApp, Teams, and more.</p></a>
+  <a class="sec-card" href="13-dashboard-mcp.html"><div class="sn"><span>14 · 8 min</span><span class="lbadge" style="background:var(--wbg);color:var(--ws)">Layer 3</span></div><h3>MCP</h3><p>Connect external tools and services through Model Context Protocol.</p></a>
+  <a class="sec-card" href="appendix-quick-ref.html"><div class="sn"><span>A · 5 min</span><span class="lbadge" style="background:rgba(78,201,176,.12);color:var(--l1)">Layer 1</span></div><h3>Quick Reference</h3><p>Vibe-coding RCTF framework, prompt patterns, recovery toolkit.</p></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

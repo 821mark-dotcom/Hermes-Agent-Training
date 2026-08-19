@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>09 · Swarm Mode — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Section 09</div>
+<span class="layer-badge lb3">🖥️ Layer 3 · Hermes Workspace</span>
+<h1>Swarm Mode — Autonomous Worker Pool</h1>
+<div class="meta"><span class="badge bt">⏱ 15 min</span><span class="badge bi">Intermediate</span><span class="badge ba">Advanced</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>Swarm is Hermes on autopilot. You set up a pool of persistent tmux-backed workers, each with a role (builder, reviewer, docs, ops, triage). Feed them tasks via the Kanban board. They run through the night, checkpoint their work, and leave you results in the Inbox. No babysitting required.</p></div>
+
+<div class="w-callout"><div class="w-lbl">🖥️ Hermes Workspace — Swarm page</div>
+<ul>
+  <li><strong>Control tab</strong> — start/stop the swarm, configure worker count and roles</li>
+  <li><strong>Board tab</strong> — Kanban view: tasks assigned to swarm workers</li>
+  <li><strong>Inbox tab</strong> — completed work, blockers, and handoffs waiting for human review</li>
+  <li><strong>Runtime tab</strong> — live view of tmux worker processes and logs</li>
+  <li><strong>Reports tab</strong> — checkpoint summaries and proof-bearing work records</li>
+</ul></div>
+
+<div class="ss-wrap">
+  <img src="screenshots/ws-swarm.png" alt="Hermes Workspace Swarm">
+  <div class="ss-cap"><div class="dot" style="background:var(--ws)"></div><span>Hermes Workspace · Swarm Mode · Control / Board / Inbox / Runtime / Reports tabs. Robot avatar at center.</span></div>
+</div>
+
+<h2>Worker Roles</h2>
+<div class="grid grid3">
+  <div class="card"><h4>🔨 builder</h4><p>Writes and edits code. Full terminal + file access. Takes Ready tasks to Running.</p></div>
+  <div class="card"><h4>🔍 reviewer</h4><p>Reviews completed work, runs tests, requests changes or approves.</p></div>
+  <div class="card"><h4>📝 docs</h4><p>Writes documentation, READMEs, and changelogs from completed work.</p></div>
+  <div class="card"><h4>🔬 research</h4><p>Web searches, reads docs, summarizes findings for other workers to use.</p></div>
+  <div class="card"><h4>⚙️ ops</h4><p>Infrastructure tasks: deployments, config, health checks, CI pipelines.</p></div>
+  <div class="card"><h4>🗂️ triage</h4><p>Decomposes and specifies incoming Triage tasks before they reach builders.</p></div>
+</div>
+
+<div class="use-case"><div class="uc-label">Use Case — Overnight Autonomous Sprint</div>
+<p><strong>Goal:</strong> Process 15 backlog tasks while you sleep. Wake up to: code written, tests passing, docs updated, blockers flagged in Inbox.</p></div>
+
+<div class="callout" style="background:rgba(165,119,255,0.08);border-left:3px solid var(--purple);padding:10px 14px;border-radius:6px;font-size:12px;margin:0 0 16px">
+  <strong>Learning / Building Path</strong><br>
+  <strong>Swarm is the final step:</strong> Start with the board, then a single Conductor mission, then manual multi-agent Operations, and only then graduate to Swarm. Swarm is the background-worker mode for running many tasks with persistent workers while you sleep or while the board is draining.
+  <br><br>
+  <strong>Beginner combo:</strong> 2 workers on 3 small tasks. <strong>Intermediate:</strong> 3–4 workers with a moderate board backlog. <strong>Advanced:</strong> overnight runs, long-form reviews, and tighter human approval/inbox guardrails.
+</div>
+
+<h2>Live Setup — Step by Step</h2>
+<ol class="steps">
+  <li>Ensure <code>hermes gateway run</code> is running (Swarm uses the gateway backend)</li>
+  <li>Populate the Kanban board with tasks (Tasks page or <code>hermes kanban create</code>)</li>
+  <li>Open Hermes Workspace → navigate to <strong>Swarm</strong></li>
+  <li>Go to <strong>Control tab</strong> — configure worker count (start with 2–3) and role assignments</li>
+  <li>Click <strong>Start Swarm</strong> — workers initialize as tmux sessions in the background</li>
+  <li>Switch to <strong>Board tab</strong> — watch tasks move from Ready → Running as workers pick them up</li>
+  <li>Check <strong>Runtime tab</strong> to see live worker logs (attach to any tmux session if needed)</li>
+  <li>When tasks complete: they move to Review. Check the <strong>Inbox tab</strong> for results and blockers</li>
+  <li>Review completed work, approve or request changes, mark Done</li>
+</ol>
+
+<div class="demo-label">Just Show Me — Launch a Swarm</div>
+<div class="tabs">
+<div class="tab-buttons">
+  <button class="tab-btn ai" data-level="i" onclick="tab(this,'sw-i')">🟡 Intermediate</button>
+  <button class="tab-btn" data-level="a" onclick="tab(this,'sw-a')">🟣 Advanced</button>
+</div>
+<div class="tab-pane active" id="sw-i">
+<p style="font-size:12px;color:var(--text-muted);margin-bottom:8px">Seed the board, then launch swarm from Workspace Chat:</p>
+<div class="demo"><div class="demo-hd"><span class="role ru">You — seed the board first</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Seed the board, then launch swarm from Workspace Chat.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Add these tasks to the kanban board for swarm processing:
+- Fix the pagination bug in the sprint report (Priority: High)
+- Add error handling to the Confluence publish function (Priority: High)
+- Write tests for the date range filter (Priority: Medium)
+- Update the README with new CLI flags (Priority: Low)
+
+Move them all to Ready status so the swarm can pick them up.">Add these tasks to the kanban board for swarm processing:
+- Fix the pagination bug in the sprint report (Priority: High)
+- Add error handling to the Confluence publish function (Priority: High)
+- Write tests for the date range filter (Priority: Medium)
+- Update the README with new CLI flags (Priority: Low)
+
+Move them all to Ready status so the swarm can pick them up.</div></div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ru">You — start the swarm</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Start the swarm once the board is ready.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Start swarm mode with 3 workers: 2 builders and 1 reviewer. Run through all Ready tasks on the board. Checkpoint after each task completion. Flag anything that needs human input in the Inbox.">Start swarm mode with 3 workers: 2 builders and 1 reviewer. Run through all Ready tasks on the board. Checkpoint after each task completion. Flag anything that needs human input in the Inbox.</div></div></div></div>
+</div>
+<div class="tab-pane" id="sw-a">
+<div class="demo"><div class="demo-hd"><span class="role ru">You — full overnight sprint config</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Launch an advanced swarm run with a reviewer and docs worker, then let the board drain overnight.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Configure and launch an overnight swarm:
+
+Workers: 4 total
+- 2 builders (handle code tasks)
+- 1 reviewer (reviews builder output, runs tests, requests changes if failing)
+- 1 docs (writes documentation for completed features)
+
+Constraints:
+- Never edit config.py or requirements.txt without flagging for human review
+- If a task takes more than 30 minutes, checkpoint and continue (don't give up)
+- Any test failures: attempt a fix once, then flag in Inbox if still failing
+- After all tasks complete: write a sprint summary to reports/overnight-summary.md
+
+Board: process all Ready tasks. When done, check Triage for any newly added tasks.">Configure and launch an overnight swarm:
+
+Workers: 4 total
+- 2 builders (handle code tasks)
+- 1 reviewer (reviews builder output, runs tests, requests changes if failing)
+- 1 docs (writes documentation for completed features)
+
+Constraints:
+- Never edit config.py or requirements.txt without flagging for human review
+- If a task takes more than 30 minutes, checkpoint and continue (don't give up)
+- Any test failures: attempt a fix once, then flag in Inbox if still failing
+- After all tasks complete: write a sprint summary to reports/overnight-summary.md
+
+Board: process all Ready tasks. When done, check Triage for any newly added tasks.</div></div></div></div>
+</div>
+</div>
+
+<div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>Start small:</strong> First Swarm run: 2 workers, 3 tasks. Verify the workflow end-to-end before scaling to overnight sprints.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>git commit before:</strong> Swarm workers make real edits. A clean commit = safe rollback. Use <code>git stash</code> for emergency recovery.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Inbox is your morning briefing:</strong> Check the Inbox tab first thing. Blocked tasks and human-needed decisions land there — everything else was handled autonomously.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Swarm vs Conductor vs Operations:</strong> Swarm = persistent background workers draining a board autonomously. Conductor = one-shot mission with agent team. Operations = manual multi-agent management.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="08-operations.html"><span class="dir">Previous</span><span class="ttl">08 · Operations</span></a>
+  <a class="next" href="10-memory-skills.html"><span class="dir">Next</span><span class="ttl">10 · Memory &amp; Skills</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

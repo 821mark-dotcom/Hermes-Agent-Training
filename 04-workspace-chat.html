@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>04 · Workspace Chat — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Section 05</div>
+<span class="layer-badge lb3">🖥️ Layer 3 · Hermes Workspace</span>
+<h1>Workspace Chat — The Default Starting Point</h1>
+<div class="meta"><span class="badge bt">⏱ 8 min</span><span class="badge bb">Beginner</span><span class="badge bi">Intermediate</span></div>
+
+<div class="callout" style="background:rgba(124,156,245,0.08);border-left:3px solid var(--ws);padding:10px 14px;border-radius:6px;font-size:12px;margin:0 0 16px">
+  <strong>Workspace Dashboard is the operational front door.</strong> If the Dashboard is the live command center for sessions, spend, status, and attention items, then Workspace Chat is the conversation layer where you issue prompts, approve actions, and steer the agent. The Dashboard is one of the clearest feature differences between Hermes Workspace and Hermes Agent.
+</div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>Workspace Chat looks like any AI chat — but it's wired to a real persistent agent. Every tool call streams as a live card you can approve or abort. You can switch models mid-thread. Every session is saved and resumable. The Agent View sidebar shows a live queue of what's happening.</p></div>
+
+<div class="h-callout"><div class="h-lbl">⚡ Hermes Agent — What's different from plain Copilot Chat</div>
+<ul>
+  <li><strong>Persistent sessions</strong> — every conversation saved, resumable from Dashboard or CLI (<code>hermes --continue</code>)</li>
+  <li><strong>Cross-session memory</strong> — FTS5-indexed facts from all past sessions injected automatically</li>
+  <li><strong>Skill lookup</strong> — agent searches 2,000+ skill library before answering; relevant procedures auto-loaded</li>
+  <li><strong>Real tool execution</strong> — <code>execute_code</code>, <code>bash</code>, <code>web_search</code>, <code>browser</code> actually run; not simulated</li>
+  <li><strong>Multi-platform</strong> — same session continues on Telegram, Slack, or any connected platform</li>
+</ul></div>
+
+<div class="w-callout"><div class="w-lbl">🖥️ Hermes Workspace — Chat UI features</div>
+<ul>
+  <li><strong>Model switcher</strong> — swap between Claude, GPT, Gemini, Codex, Ollama mid-conversation</li>
+  <li><strong>Live tool cards</strong> — each tool call streams in real time; approve or abort before it executes</li>
+  <li><strong>Agent View panel</strong> — right sidebar: avatar, active task queue, history, token usage meter</li>
+  <li><strong>SSE streaming</strong> — real-time output with markdown + syntax highlighting</li>
+  <li><strong>Session list</strong> — left panel lists all conversations; click any to resume</li>
+  <li><strong>HermesWorld</strong> — the playable demo environment (bottom of nav)</li>
+</ul></div>
+
+<div class="ss-wrap">
+  <img src="screenshots/ws-chat.png" alt="Hermes Workspace Chat">
+  <div class="ss-cap"><div class="dot" style="background:var(--ws)"></div><span>Hermes Workspace · Chat page · Left nav, session list, Agent View sidebar</span></div>
+</div>
+
+<div class="demo-label">Just Show Me — First Workspace Chat</div>
+<div class="tabs">
+<div class="tab-buttons">
+  <button class="tab-btn ab" data-level="b" onclick="tab(this,'wc-b')">🟢 Beginner</button>
+  <button class="tab-btn" data-level="i" onclick="tab(this,'wc-i')">🟡 Intermediate</button>
+  <button class="tab-btn" data-level="a" onclick="tab(this,'wc-a')">🟣 Advanced</button>
+</div>
+<div class="tab-pane active" id="wc-b">
+<div class="demo"><div class="demo-hd"><span class="role ru">You — paste into Workspace chat</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="What can you do right now? Show me your active tools, how many skills you have loaded, and a one-sentence summary of what you remember about me.">What can you do right now? Show me your active tools, how many skills you have loaded, and a one-sentence summary of what you remember about me.</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ra">Hermes Agent — sample response</span></div>
+<div class="demo-bd resp"><span class="o">Active tools:</span> execute_code, bash, read_file, write_file
+  web_search, browser, image_gen, tts (via Nous Portal Tool Gateway)
+
+<span class="o">Skills loaded:</span> 2,347 indexed | 12 recently used
+  Top: python-debug, git-workflow, api-design
+
+<span class="o">Memory summary:</span> You prefer Python, work on a Jira/Confluence reporting
+  project, and like concise bullet-point responses.
+
+Model: gpt-5.4 · Provider: copilot · Backend: Enhanced</div></div>
+</div>
+<div class="tab-pane" id="wc-i">
+<div class="demo"><div class="demo-hd"><span class="role ru">You</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Read the files in my current workspace. Summarize the project purpose, identify the main entry point, and list any TODO comments you find. Don't make any changes yet.">Read the files in my current workspace. Summarize the project purpose, identify the main entry point, and list any TODO comments you find. Don't make any changes yet.</div></div></div>
+</div>
+<div class="tab-pane" id="wc-a">
+<div class="demo"><div class="demo-hd"><span class="role ru">You</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Analyze my last 10 sessions. Identify: (1) which tasks took the most turns, (2) patterns in what I ask for most often, (3) tools I use most. Then suggest 3 skills I should install to make my workflow more efficient.">Analyze my last 10 sessions. Identify: (1) which tasks took the most turns, (2) patterns in what I ask for most often, (3) tools I use most. Then suggest 3 skills I should install to make my workflow more efficient.</div></div></div>
+</div>
+</div>
+
+<div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>Interrupt mid-stream:</strong> Type a new message while the agent is running and press Enter — it interrupts the current task and switches to your new instruction.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>/model</strong> in chat switches models instantly — but only among providers you've already configured. Use <code>hermes model</code> in terminal to add new providers.</span></div>
+<div class="tip"><span class="i">⚡</span><span>The <strong>Agent View panel</strong> (right sidebar) shows real token usage per message — useful for knowing when you're approaching context limits.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="04-dashboard.html"><span class="dir">Previous</span><span class="ttl">04 · Workspace Dashboard</span></a>
+  <a class="next" href="05-jobs.html"><span class="dir">Next</span><span class="ttl">06 · Jobs</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

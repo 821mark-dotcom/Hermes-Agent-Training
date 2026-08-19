@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>12 · Messaging Gateway — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Section 12</div>
+<span class="layer-badge lb2">⚡ Layer 2 · Hermes Agent</span>
+<h1>Messaging Gateway — Hermes on 20+ Platforms</h1>
+<div class="meta"><span class="badge bt">⏱ 10 min</span><span class="badge bb">Beginner</span><span class="badge bi">Intermediate</span><span class="badge ba">Advanced</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>The Messaging Gateway lets you talk to Hermes from any messaging app — not just the browser UI. Text your agent on Telegram while it runs on a server. Have it send automated reports to your Slack channel. Respond to Hermes questions from your phone. One agent, everywhere you are.</p></div>
+
+<div class="h-callout"><div class="h-lbl">⚡ Hermes Agent — Supported Platforms</div>
+<div class="grid grid3" style="margin-top:8px">
+  <div class="card"><h4>📱 Mobile</h4><p>Telegram · WhatsApp · Signal · SMS</p></div>
+  <div class="card"><h4>💼 Team</h4><p>Slack · Microsoft Teams · Discord · Mattermost</p></div>
+  <div class="card"><h4>📧 Other</h4><p>Email · Matrix · DingTalk · Feishu · WeCom · Home Assistant · Google Chat</p></div>
+</div>
+<p style="font-size:12px;margin-top:8px;color:var(--text-muted)">20+ platforms total from one gateway config. One agent responds on all.</p></div>
+
+<h2>Live Setup — Telegram (fastest path)</h2>
+<ol class="steps">
+  <li>Start the gateway: <code>hermes gateway run</code></li>
+  <li>Run setup wizard: <code>hermes gateway setup</code> — select Telegram</li>
+  <li>Create a bot via @BotFather on Telegram → get your bot token</li>
+  <li>Paste the token when prompted</li>
+  <li>Set your Telegram user ID as an allowed user</li>
+  <li>Message your bot — Hermes responds</li>
+</ol>
+
+<div class="demo-label">Just Show Me — Gateway in Action</div>
+<div class="tabs">
+<div class="tab-buttons">
+  <button class="tab-btn ab" data-level="b" onclick="tab(this,'gw-b')">🟢 Beginner</button>
+  <button class="tab-btn" data-level="i" onclick="tab(this,'gw-i')">🟡 Intermediate</button>
+  <button class="tab-btn" data-level="a" onclick="tab(this,'gw-a')">🟣 Advanced</button>
+</div>
+<div class="tab-pane active" id="gw-b">
+<div class="demo"><div class="demo-hd"><span class="role ru">Terminal — setup gateway</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="hermes gateway setup    # interactive platform configuration
+hermes gateway run      # start the gateway (keep running)">hermes gateway setup    # interactive platform configuration
+hermes gateway run      # start the gateway (keep running)</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ru">Send a message from Hermes to your Telegram</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="hermes send --to telegram 'Gateway is live! Hermes is ready.'">hermes send --to telegram 'Gateway is live! Hermes is ready.'</div></div></div>
+</div>
+<div class="tab-pane" id="gw-i">
+<div class="demo"><div class="demo-hd"><span class="role ru">You — outbound automated report</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Generate a sprint summary for project ACME and send it to our Slack #team-updates channel.">Generate a sprint summary for project ACME and send it to our Slack #team-updates channel.</div></div></div>
+<div class="demo"><div class="demo-hd"><span class="role ru">Terminal — scheduled gateway message</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="hermes cron create 'Monday sprint summary' \
+  --schedule '0 8 * * MON' \
+  --prompt 'Generate ACME sprint summary and send to slack:#team-updates' \
+  --deliver slack">hermes cron create 'Monday sprint summary' \
+  --schedule '0 8 * * MON' \
+  --prompt 'Generate ACME sprint summary and send to slack:#team-updates' \
+  --deliver slack</div></div></div>
+</div>
+<div class="tab-pane" id="gw-a">
+<div class="demo"><div class="demo-hd"><span class="role ru">You — webhook-triggered pipeline</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Set up a webhook: when a Jira issue is created with label 'urgent', Hermes should:
+1. Fetch the issue details and affected components
+2. Estimate severity (P1/P2/P3) based on component criticality
+3. Route to the correct Slack channel: #p1-alerts or #p2-issues
+4. Post an acknowledgment comment on the Jira ticket
+
+Show me the webhook configuration.">Set up a webhook: when a Jira issue is created with label 'urgent', Hermes should:
+1. Fetch the issue details and affected components
+2. Estimate severity (P1/P2/P3) based on component criticality
+3. Route to the correct Slack channel: #p1-alerts or #p2-issues
+4. Post an acknowledgment comment on the Jira ticket
+
+Show me the webhook configuration.</div></div></div>
+</div>
+</div>
+
+<div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>Test in DM first:</strong> Before routing to a team channel, test Gateway responses in a private DM to verify output quality.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>hermes send for scripts:</strong> <code>hermes send --to telegram "deploy finished"</code> works from cron jobs, CI hooks, and monitoring daemons without starting a gateway loop — it talks directly to the platform's REST API.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>WSL users:</strong> Use <code>hermes gateway run</code> (not <code>start</code>) and wrap in tmux: <code>tmux new -s hermes 'hermes gateway run'</code> for persistence.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="11-files-terminal.html"><span class="dir">Previous</span><span class="ttl">11 · Files &amp; Terminal</span></a>
+  <a class="next" href="13-dashboard-mcp.html"><span class="dir">Next</span><span class="ttl">13 · Dashboard &amp; MCP</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

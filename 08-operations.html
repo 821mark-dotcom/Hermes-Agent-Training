@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>08 · Operations — Hermes Training</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+
+<div class="section-num">Section 08</div>
+<span class="layer-badge lb3">🖥️ Layer 3 · Hermes Workspace</span>
+<h1>Operations — Multi-Agent Console</h1>
+<div class="meta"><span class="badge bt">⏱ 12 min</span><span class="badge bi">Intermediate</span><span class="badge ba">Advanced</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>Operations is the control panel for running multiple Hermes agents at once. The named profiles — Sage, Builder, Scribe, Ops, Trader — are not special product tiers. They are built-in starter presets: saved default configurations that tune tools, skills, and behavior for common roles. You can use them as-is or create your own custom profile.</p></div>
+
+<div class="w-callout"><div class="w-lbl">🖥️ Hermes Workspace — Operations page</div>
+<ul>
+  <li><strong>Profile</strong> — a saved starting configuration for an agent (tools, model defaults, skills, behavior)</li>
+  <li><strong>Preset</strong> — one of the built-in starting profiles such as Sage / Builder / Scribe / Ops / Trader</li>
+  <li><strong>Overview tab</strong> — live grid of all running agents with status and activity</li>
+  <li><strong>Outputs tab</strong> — consolidated output from all agents</li>
+  <li><strong>New Agent</strong> — launch another agent from a selected profile or custom config</li>
+  <li><strong>"Needs setup" detection</strong> — flags profiles that aren't fully configured</li>
+</ul></div>
+
+<div class="ss-wrap">
+  <img src="screenshots/ws-operations-clean.svg" alt="Hermes Workspace Operations clean mockup">
+  <div class="ss-cap"><div class="dot" style="background:var(--ws)"></div><span>Hermes Workspace · Operations · clean overview of profile presets, running agents, and outputs</span></div>
+</div>
+
+<div class="info"><span>ℹ️</span><span><strong>Profiles are presets, not fixed roles.</strong> Sage, Builder, Scribe, Ops, and Trader are examples of useful starter configs. They are defaults you can keep, edit, or replace with custom profiles that match your own workflow.</span></div>
+
+<h2>Profile Presets Explained</h2>
+<div class="grid grid2">
+  <div class="card" style="border-left:3px solid var(--blue)"><h4>🧠 Sage</h4><p>Research and analysis. Optimized for web search, document reading, and synthesizing information. Best for: market research, competitive analysis, summarizing docs.</p></div>
+  <div class="card" style="border-left:3px solid var(--green)"><h4>🔨 Builder</h4><p>Code writing and engineering. Full tool access including terminal and file editing. Best for: feature development, debugging, refactoring.</p></div>
+  <div class="card" style="border-left:3px solid var(--purple)"><h4>✍️ Scribe</h4><p>Writing and documentation. Optimized for long-form content, structured output, and markdown formatting. Best for: docs, reports, READMEs.</p></div>
+  <div class="card" style="border-left:3px solid var(--orange)"><h4>⚙️ Ops</h4><p>Infrastructure and monitoring. Terminal-heavy, system-focused. Best for: deployments, log analysis, health checks.</p></div>
+  <div class="card" style="border-left:3px solid var(--yellow)"><h4>📊 Trader</h4><p>Data and financial analysis. Optimized for CSV/data processing and quantitative tasks. Best for: financial models, data pipelines, reporting.</p></div>
+</div>
+
+<div class="use-case"><div class="uc-label">Use Case — Three Projects Running Concurrently</div>
+<p>You're managing a sprint (code + docs + infra changes) simultaneously. Launch a Builder for the code, a Scribe for the docs, and an Ops agent for the deployment scripts — all running at the same time, visible in the Operations grid.</p></div>
+
+<div class="callout" style="background:rgba(255,183,77,0.08);border-left:3px solid var(--orange);padding:10px 14px;border-radius:6px;font-size:12px;margin:0 0 16px">
+  <strong>Learning / Building Path</strong><br>
+  <strong>Operations comes after Tasks and Conductor:</strong> Use Operations when you want to manually launch 2–3 agents with different profiles and watch them side by side. It is useful once the board lifecycle is familiar and you want more direct control.
+  <br><br>
+  <strong>Beginner combo:</strong> 1 Builder + 1 Scribe, both with short tasks. <strong>Intermediate:</strong> 3 agents with a shared sprint objective. <strong>Advanced:</strong> custom per-profile model config and parallel workstreams with tighter guardrails.
+</div>
+
+<h2>Live Setup — Step by Step</h2>
+<ol class="steps">
+  <li>Ensure <code>hermes gateway run</code> is running (Operations uses the gateway for each agent)</li>
+  <li>Open Hermes Workspace → navigate to <strong>Operations</strong></li>
+  <li>Click <strong>New Agent</strong> — select a profile preset (e.g., Builder)</li>
+  <li>Give the agent a task in the agent's chat input</li>
+  <li>Repeat: click <strong>New Agent</strong> again, select Scribe, give it a docs task</li>
+  <li>Watch both agents appear in the <strong>Overview grid</strong> with live status</li>
+  <li>Switch to <strong>Outputs tab</strong> to see consolidated results from all agents</li>
+</ol>
+
+<div class="demo-label">Just Show Me — Launching Multiple Agents</div>
+<div class="tabs">
+<div class="tab-buttons">
+  <button class="tab-btn ai" data-level="i" onclick="tab(this,'op-i')">🟡 Intermediate</button>
+  <button class="tab-btn" data-level="a" onclick="tab(this,'op-a')">🟣 Advanced</button>
+</div>
+<div class="tab-pane active" id="op-i">
+<p style="font-size:12px;color:var(--text-muted);margin-bottom:8px">Task for the Builder agent:</p>
+<div class="demo"><div class="demo-hd"><span class="role ru">Builder agent task</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Refactor jira_client.py: add retry logic with exponential backoff (max 3 retries) to all API calls. Don't change any function signatures. Run the existing tests when done and report the results.">Refactor jira_client.py: add retry logic with exponential backoff (max 3 retries) to all API calls. Don't change any function signatures. Run the existing tests when done and report the results.</div></div></div>
+<p style="font-size:12px;color:var(--text-muted);margin:10px 0 6px">Task for the Scribe agent (simultaneously):</p>
+<div class="demo"><div class="demo-hd"><span class="role ru">Scribe agent task</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Read jira_client.py and write comprehensive API documentation for every public function. Format as a docs/api-reference.md file. Include: function signature, parameters, return value, and a usage example for each.">Read jira_client.py and write comprehensive API documentation for every public function. Format as a docs/api-reference.md file. Include: function signature, parameters, return value, and a usage example for each.</div></div></div>
+</div>
+<div class="tab-pane" id="op-a">
+<div class="demo"><div class="demo-hd"><span class="role ru">You — orchestrate from Workspace Chat</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="Launch 3 agents in Operations mode:
+1. Builder (profile: builder): Implement input validation for all CLI arguments in main.py
+2. Scribe (profile: scribe): Write the user guide section for the new validation behavior  
+3. Ops (profile: ops): Add the new validation logic to the CI test pipeline
+
+All three should run concurrently. Report back when all three are complete with a summary of what each agent did.">Launch 3 agents in Operations mode:
+1. Builder (profile: builder): Implement input validation for all CLI arguments in main.py
+2. Scribe (profile: scribe): Write the user guide section for the new validation behavior
+3. Ops (profile: ops): Add the new validation logic to the CI test pipeline
+
+All three should run concurrently. Report back when all three are complete with a summary of what each agent did.</div></div></div>
+</div>
+</div>
+
+<h2>Advanced: Per-Profile Model Configuration</h2>
+<div class="callout" style="background:rgba(124,156,245,0.08);border-left:3px solid var(--ws);padding:10px 14px;border-radius:6px;font-size:12px;margin-bottom:14px">
+  <strong>🟣 Advanced only</strong> — This is optional. Most users should skip this and leave everything at the default. The benefit is cost optimization at scale: point high-volume worker profiles at a cheaper model while keeping your orchestrator on a frontier tier.
+</div>
+
+<p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">Each Hermes profile can use a different LLM. This is configured through per-profile config files — there is no UI for this. If a profile has no model set, it inherits the global default from <code>~/.hermes/config.yaml</code>.</p>
+
+<div class="grid grid2" style="margin-bottom:14px">
+  <div class="card" style="border-left:3px solid var(--green)"><h4>✅ Leave at AUTO when:</h4><ul style="font-size:12px;margin:6px 0 0;padding-left:16px"><li>You have one primary account (e.g. Copilot)</li><li>Cost isn't a concern for your workload</li><li>You're still learning the system</li><li>All profiles use the same provider</li></ul></div>
+  <div class="card" style="border-left:3px solid var(--orange)"><h4>⚠️ Override per-profile when:</h4><ul style="font-size:12px;margin:6px 0 0;padding-left:16px"><li>Workers run many parallel tasks and cost adds up</li><li>You want a cheaper/faster model for simple agents</li><li>You want a stronger model for a specific profile (e.g. reviewer)</li><li>You're running profiles across different providers</li></ul></div>
+</div>
+
+<div class="h-callout"><div class="h-lbl">⚡ Hermes Agent — Per-Profile Config Files</div>
+<p style="font-size:12px;margin-bottom:8px">Each profile gets its own config directory. Create or edit the file to set that profile's model:</p>
+<div class="demo"><div class="demo-hd"><span class="role ru">~/.hermes/profiles/builder/config.yaml</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-body"><div class="demo-instruction"><span class="mini-label">Do this</span><div class="demo-instruction-text">Use this prompt in the appropriate chat, terminal, or field.</div></div><div class="demo-prompt"><span class="mini-label">Paste into chat</span><div class="demo-bd" data-prompt="_config_version: 33
+model:
+  provider: copilot
+  default: openai/gpt-4.1-mini   # cheaper model for high-volume build tasks">_config_version: 33
+model:
+  provider: copilot
+  default: openai/gpt-4.1-mini   # cheaper model for high-volume build tasks</div></div></div>
+<div class="demo" style="margin-top:8px"><div class="demo-hd"><span class="role ru">~/.hermes/profiles/reviewer/config.yaml</span><button class="copy-btn" onclick="cp(this)">Copy</button></div><div class="demo-bd" data-prompt="_config_version: 33
+model:
+  provider: copilot
+  default: openai/gpt-5.4        # frontier model for quality-sensitive reviews">_config_version: 33
+model:
+  provider: copilot
+  default: openai/gpt-5.4        # frontier model for quality-sensitive reviews</div></div>
+<p style="font-size:12px;margin-top:8px">The dispatcher automatically injects the correct <code>HERMES_HOME</code> when spawning a profile, so each worker reads its own model settings in isolation.</p>
+</div>
+
+<div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
+<div class="pt-body">
+<div class="tip"><span class="i">⚡</span><span><strong>Profiles are additive:</strong> Each profile preset tunes tool access and skill loading. A Builder has terminal + file tools enabled; a Sage has web search emphasized. They're the same agent with different defaults.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Don't overlap file edits:</strong> If two agents edit the same file simultaneously, conflicts happen. Give overlapping tasks to Conductor (which coordinates) rather than Operations (which doesn't).</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Operations vs Conductor:</strong> Operations = you manually assign tasks to agents and watch them. Conductor = you describe a goal and it figures out the agent assignments automatically.</span></div>
+</div></div>
+
+<div class="page-nav">
+  <a class="prev" href="07-conductor.html"><span class="dir">Previous</span><span class="ttl">07 · Conductor</span></a>
+  <a class="next" href="09-swarm.html"><span class="dir">Next</span><span class="ttl">09 · Swarm Mode</span></a>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
