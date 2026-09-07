@@ -35,6 +35,30 @@
 <h2>ELI10: Conductor vs. Operations vs. Swarm</h2>
 <p style="font-size:13px">Three different ways to get agents working, from most-automated to most-manual:</p>
 
+<div style="display:flex;flex-direction:column;gap:8px;margin:16px 0;font-size:12px">
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+    <div style="background:var(--wbg);color:var(--ws);border:1px solid var(--ws);border-radius:6px;padding:8px 12px;font-weight:600">Conductor<br><span style="font-weight:400;font-size:11px">plain-English goal</span></div>
+    <span style="color:var(--text-muted)">→ uses →</span>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:8px 12px">Dashboard mission API<br><span style="font-size:11px;color:var(--text-muted)">if <code>hermes dashboard</code> running</span></div>
+    <span style="color:var(--text-muted)">or, falls back →</span>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:8px 12px">Swarm dispatch engine</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;padding-left:24px">
+    <span style="color:var(--text-muted)">↓ both produce ↓</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+    <div style="background:var(--hbg);color:var(--hermes);border:1px solid var(--hermes);border-radius:6px;padding:8px 12px;font-weight:600">Kanban task graph<br><span style="font-weight:400;font-size:11px">parents / children</span></div>
+    <span style="color:var(--text-muted)">→</span>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:8px 12px">tmux workers auto-pick-up tasks</div>
+  </div>
+  <hr style="margin:8px 0">
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+    <div style="background:rgba(78,201,176,.1);color:var(--l1);border:1px solid var(--l1);border-radius:6px;padding:8px 12px;font-weight:600">Operations<br><span style="font-weight:400;font-size:11px">you manually launch each agent</span></div>
+    <span style="color:var(--text-muted)">- - does NOT go through Conductor/Swarm - - →</span>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:8px 12px">You relay output between agents yourself</div>
+  </div>
+</div>
+
 <div class="w-callout"><div class="w-lbl">How they relate</div>
 <ul>
 <li><strong>Conductor</strong> = "tell it the goal, it plans the graph for you." You type a plain-English mission; Conductor decides how to break it into tasks and who does what. It has no separate engine of its own — it either calls the Dashboard's mission API (if <code>hermes dashboard</code> is running) or falls back to the same Swarm graph-creation mechanism as <code>hermes kanban swarm</code>. Conductor is a planner sitting on top of Swarm, not a separate system.</li>
