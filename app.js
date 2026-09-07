@@ -18,6 +18,7 @@ const NAV = [
   {href:'15-exercise-kanban.html',num:'16',label:'Exercise 1 · Task Sprint',time:'20m'},
   {href:'16-exercise-conductor.html',num:'17',label:'Exercise 2 · Mission to Board',time:'20m'},
   {href:'17-exercise-pipeline.html',num:'18',label:'Exercise 3 · Full Pipeline',time:'25m'},
+  {href:'19-vibe-coder-case-study.html',num:'19',label:'Vibe Coder Case Study',time:'20m'},
   {href:'appendix-quick-ref.html',num:'A',label:'Quick Reference',time:'5m'},
 ];
 function getNavCollapsed(){

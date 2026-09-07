@@ -32,6 +32,32 @@
 <p><strong>When to use it:</strong> the job is larger than a single pass: building a feature, writing docs, testing changes, and preparing a summary for review. This is where Conductor, Operations, and Swarm become useful.</p>
 </div>
 
+<h2>ELI10: Conductor vs. Operations vs. Swarm</h2>
+<p style="font-size:13px">Three different ways to get agents working, from most-automated to most-manual:</p>
+
+<div class="w-callout"><div class="w-lbl">How they relate</div>
+<ul>
+<li><strong>Conductor</strong> = "tell it the goal, it plans the graph for you." You type a plain-English mission; Conductor decides how to break it into tasks and who does what. It has no separate engine of its own — it either calls the Dashboard's mission API (if <code>hermes dashboard</code> is running) or falls back to the same Swarm graph-creation mechanism as <code>hermes kanban swarm</code>. Conductor is a planner sitting on top of Swarm, not a separate system.</li>
+<li><strong>Swarm</strong> = the actual engine room. <code>hermes kanban swarm</code> creates the real task graph (parent/child cards: workers → verifier → synthesizer), and tmux-backed worker processes are supposed to auto-pick-up tasks from that graph. This is what Conductor calls internally when you don't specify the graph yourself.</li>
+<li><strong>Operations</strong> = the manual, no-automation path. You launch each agent yourself, one at a time, and <em>you</em> are the relay — copying one agent's output into the next agent's prompt. It never touches Conductor or Swarm at all.</li>
+</ul></div>
+
+<table style="width:100%;border-collapse:collapse;font-size:12px;margin:12px 0">
+<tr style="border-bottom:1px solid var(--border)"><th style="text-align:left;padding:6px">Call this directly when...</th><th style="text-align:left;padding:6px">Why</th></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px"><strong>Conductor</strong></td><td style="padding:6px">You have a real goal but don't want to plan the task breakdown yourself — best default entry point for a fresh idea.</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px"><strong>Swarm</strong> (<code>hermes kanban swarm</code> CLI)</td><td style="padding:6px">You already know the exact decomposition you want and need deterministic, scriptable control — e.g. for repeatable automation.</td></tr>
+<tr><td style="padding:6px"><strong>Operations</strong></td><td style="padding:6px">Swarm/Conductor is broken or unavailable, you want full manual visibility/control over each step, or the job is small enough that being the relay yourself gives the clearest audit trail.</td></tr>
+</table>
+
+<h2>Interacting with agents directly, beyond Conductor</h2>
+<p style="font-size:13px">Conductor is the friendliest front door, but it is not the only — or even the required — way to work with agents.</p>
+<ul>
+<li>You can always drop down a level and talk to an individual agent directly, whether that's an Operations profile session or a single worker's tmux pane. Nothing requires going through Conductor's plain-English mission layer if you already know exactly which agent you want and what you want it to do.</li>
+<li>This is not a workaround or a "lesser" path — it is more transparent (you see exactly what each agent said/received), more debuggable (you can isolate exactly which agent is misbehaving), and fully unaffected by bugs in the orchestration layer above it.</li>
+<li><strong>Trade-off:</strong> going direct means you become the router/relay between agents — there is no automatic handoff, so you're responsible for passing context from one agent to the next. Manageable for a small number of agents (2-4); does not scale well to dozens, which is where Conductor/Swarm's automatic dispatch earns its keep.</li>
+<li><strong>Rule of thumb:</strong> start with Conductor for a new, not-yet-understood goal; drop to direct agent-by-agent interaction in Operations when Conductor/Swarm is unavailable, misbehaving, or when you specifically want the transparency of being the relay yourself.</li>
+</ul>
+
 <div class='demo-label'>Just Show Me — Three Successive Hermes Workflows</div>
 <div class='tabs'>
 <div class='tab-buttons'>
