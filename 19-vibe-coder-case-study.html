@@ -13,67 +13,89 @@
 <div class="meta"><span class="badge bt">⏱ 20 min</span><span class="badge bi">Intermediate</span></div>
 
 <div class="eli10"><div class="lbl">ELI10</div>
-<p>This is a real, verified run — not a hypothetical. A vibe coder wanted to prove they could use multi-agent orchestration and walk away with a finished result. We ran a 4-agent sequential pipeline through Operations: a Researcher compares options, a Writer turns that into a recommendation + code, a Vetter actually checks the code runs and catches a real bug, and an Orchestrator reports the final status back in plain English. Every step below actually happened, including the mistakes.</p></div>
+<p>A real, verified run — not a hypothetical. 4 agents ran in sequence through Operations: Researcher compares options, Writer drafts a recommendation + code, Vetter actually runs the code and catches a real bug, Orchestrator reports the final status in plain English. Every step below actually happened, including the mistakes.</p></div>
 
 <div class="w-callout"><div class="w-lbl">🖥️ What ran, in order</div>
 <ul>
-  <li><strong>Researcher (Sage)</strong> — compared plotly/bokeh/altair for financial dashboards, 13 cited sources</li>
-  <li><strong>Writer/Synthesizer (Scribe)</strong> — turned raw research into a recommendation + Python code stub</li>
-  <li><strong>Vetter/Approver (Ops, repurposed)</strong> — actually executed the code, caught a real data bug, returned <strong>NEEDS REVISION</strong></li>
-  <li><strong>Main Orchestrator</strong> — synthesized the full chain into a 3-sentence human-readable status + next action</li>
+  <li><strong>Researcher (Sage)</strong> — plotly vs bokeh vs altair, 13 cited sources</li>
+  <li><strong>Writer (Scribe)</strong> — recommendation + Python code stub</li>
+  <li><strong>Vetter (Ops)</strong> — ran the code, caught a real bug → <strong>NEEDS REVISION</strong></li>
+  <li><strong>Orchestrator</strong> — 3-sentence status + next action</li>
 </ul></div>
 
 <div class="ss-wrap">
   <img src="screenshots/ws-operations.png" alt="Hermes Workspace Operations">
-  <div class="ss-cap"><div class="dot" style="background:var(--ws)"></div><span>Hermes Workspace · Operations · each agent is a separate session; the facilitator relays one agent's output into the next agent's task prompt — that relay is the handoff</span></div>
+  <div class="ss-cap"><div class="dot" style="background:var(--ws)"></div><span>Operations — each agent is its own session; you relay one agent's output into the next agent's prompt. That relay <em>is</em> the handoff.</span></div>
 </div>
 
-<div class="use-case"><div class="uc-label">Why sequential, not parallel</div>
-<p>Real-world multi-agent orchestration does not require concurrency. The defining feature is <strong>distinct agent identities + a real handoff of output/context between them</strong> — sequential handoff (researcher → writer → reviewer) is a legitimate, common pattern, not a lesser version of "real" orchestration. What disqualifies a run is a single agent doing every step itself in one session, no matter how many tool calls it makes internally.</p></div>
+<hr>
 
-<h2>Where to vet handoffs and output (by design)</h2>
-<ul>
-  <li><strong>Operations → individual agent's Chat/session view</strong> — the detailed audit trail per agent: every tool call, reasoning step, and the exact task prompt it received, including handoff content pasted in from the previous agent.</li>
-  <li><strong>Operations → Outputs tab</strong> — a consolidated summary across all running agents for a quick check without opening each transcript.</li>
-  <li>Because this pipeline used <strong>manual relay</strong> (not automated Swarm/Conductor handoff), the "chatter" between agents is not automatic — it is each agent's last message pasted as the next agent's first message. To audit the full chain, open each of the 4 agents' Chat sessions in sequence.</li>
-</ul>
+<h2>Why sequential, not parallel</h2>
+<p style="font-size:13px">Real orchestration = <strong>distinct agents + a real handoff</strong>, not concurrency. Sequential (researcher → writer → reviewer) is a legitimate pattern. What disqualifies a run: one agent doing every step itself, no matter how many tool calls it makes.</p>
+
+<div class="ss-wrap">
+  <img src="screenshots/ws-profiles.png" alt="Hermes Workspace New Agent profile picker">
+  <div class="ss-cap"><div class="dot" style="background:var(--ws)"></div><span>New Agent → pick a preset (Sage/Scribe/Ops) → this becomes one link in the chain.</span></div>
+</div>
+
+<hr>
+
+<h2>Where to vet handoffs and output</h2>
+<table style="width:100%;border-collapse:collapse;font-size:12px;margin:8px 0 16px">
+<tr style="border-bottom:1px solid var(--border)"><th style="text-align:left;padding:6px">View</th><th style="text-align:left;padding:6px">Shows you</th></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Agent's own <strong>Chat session</strong></td><td style="padding:6px">Full audit trail: every tool call + the exact handoff text it received</td></tr>
+<tr><td style="padding:6px">Operations → <strong>Outputs tab</strong></td><td style="padding:6px">Quick consolidated summary across all agents</td></tr>
+</table>
+<p style="font-size:12px;color:var(--text-muted);margin-top:-8px">Manual relay here, not automated — each agent's last message becomes the next one's first message. Open each Chat session in order to audit the full chain.</p>
+
+<div class="ss-wrap">
+  <img src="screenshots/ws-chat.png" alt="Hermes Workspace Chat session view">
+  <div class="ss-cap"><div class="dot" style="background:var(--ws)"></div><span>An agent's Chat session — this is the audit trail for one link in the chain.</span></div>
+</div>
+
+<hr>
 
 <h2>Out-of-the-box vs. custom — don't conflate these</h2>
 <table style="width:100%;border-collapse:collapse;font-size:12px;margin:12px 0">
-<tr style="border-bottom:1px solid var(--border)"><th style="text-align:left;padding:6px">Agent</th><th style="text-align:left;padding:6px">Out-of-box or custom?</th><th style="text-align:left;padding:6px">Detail</th></tr>
-<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Main Orchestrator</td><td style="padding:6px">100% out-of-box</td><td style="padding:6px">Pre-existing in the install; never created or touched.</td></tr>
-<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Scribe</td><td style="padding:6px">~90% out-of-box</td><td style="padding:6px">Hardcoded default persona ("content writer &amp; documentation specialist") already matched the need.</td></tr>
-<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Sage</td><td style="padding:6px">Shell out-of-box, prompt rewritten</td><td style="padding:6px">Hardcoded default (verified in <code>agent-presets.ts</code>) is an X/Twitter growth-marketing persona, not "research."</td></tr>
-<tr><td style="padding:6px">Ops</td><td style="padding:6px">Shell out-of-box, prompt rewritten</td><td style="padding:6px">Hardcoded default is a "business operations &amp; strategy analyst" persona, not "infra/monitoring."</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><th style="text-align:left;padding:6px">Agent</th><th style="text-align:left;padding:6px">Status</th><th style="text-align:left;padding:6px">Detail</th></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Orchestrator</td><td style="padding:6px">100% out-of-box</td><td style="padding:6px">Pre-existing; never touched.</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Scribe</td><td style="padding:6px">~90% out-of-box</td><td style="padding:6px">Default persona already matched the need.</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Sage</td><td style="padding:6px">Prompt rewritten</td><td style="padding:6px">Default is an X/Twitter growth persona (verified in <code>agent-presets.ts</code>), not research.</td></tr>
+<tr><td style="padding:6px">Ops</td><td style="padding:6px">Prompt rewritten</td><td style="padding:6px">Default is a business-strategy analyst, not QA.</td></tr>
 </table>
 
-<div class="tip"><span class="i">⚡</span><span><strong>Fix bad defaults once, permanently — not per task:</strong> the first fix to Sage/Ops was a task-specific system-prompt rewrite (all about charting libraries), which turned out to save <strong>permanently</strong> to <code>~/.hermes/profiles/&lt;name&gt;/config.yaml</code> — meaning every future session would stay stuck on that one topic. Corrected properly: rewrote both profiles to be genuinely generic and reusable (a general-purpose research agent, a general-purpose QA/vetter agent). Task-specific asks belong in the per-session message, not the permanent profile.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Fix bad defaults once, permanently:</strong> a task-specific rewrite saves to <code>~/.hermes/profiles/&lt;name&gt;/config.yaml</code> forever. Write a generic, reusable persona instead — task specifics belong in the message, not the profile.</span></div>
 
-<div class="tip"><span class="i">⚡</span><span><strong>Clarify only upfront, never mid-flight:</strong> an early draft of Sage's generic prompt said "ask a clarifying question if the task is ambiguous." That's wrong for a walk-away pipeline — a mid-flight question has nowhere to go if no one's watching, and stalls everything. This project's own Conductor documentation (Section 07) confirms the correct pattern: Conductor pauses and asks <strong>before</strong> a mission starts if it's underspecified, but once dispatched, agents should default to a clearly-labeled reasonable assumption and keep going — only surfacing genuine blockers (missing access, destructive/irreversible action, direct contradiction) as a note in the final output, never a pause-and-wait.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Clarify only upfront, never mid-flight:</strong> a mid-task question has nowhere to go if no one's watching. Conductor (Section 07) confirms the pattern: ask before dispatch; after that, assume + flag + keep going.</span></div>
+
+<hr>
 
 <h2>Confirmed bug + fix — zsh crashes Swarm workers</h2>
-<p style="font-size:13px">Before falling back to Operations, we first tried <code>hermes kanban swarm</code>. The task graph was created correctly every time, but the tmux-backed worker launcher (<code>hermes-workspace/src/routes/api/swarm-dispatch.ts</code>, <code>buildHermesTmuxLaunchCommand</code>) captured exit codes with <code>status=$?</code> — <code>status</code> is a <strong>read-only reserved variable in zsh</strong> (macOS/most Linux default shell), so every worker crashed on launch, unconditionally, before doing any real work.</p>
-<p style="font-size:13px">Verified directly: <code>zsh -c 'status=$?'</code> reproduces <code>zsh: read-only variable: status</code> on demand. Confirmed <strong>not</strong> a network/corporate-proxy issue (npm registry reachable, HTTP 200). <strong>Fixed and verified</strong>: renamed the variable to <code>exit_code</code>.</p>
-<div class="w-callout" style="border-left-color:var(--text-muted)"><div class="w-lbl" style="color:var(--text-muted)">ℹ️ This bug never affected the pipeline above</div>
-<p style="font-size:12px">The zsh bug only lives in the Swarm/tmux code path. A vibe coder on a brand-new machine, with no fix applied, can still run the entire Researcher → Writer → Vetter → Orchestrator pipeline above successfully — the fix is only needed for Swarm mode specifically.</p></div>
+<p style="font-size:13px">Tried <code>hermes kanban swarm</code> first — graph created fine, but every worker crashed instantly: the tmux launcher (<code>swarm-dispatch.ts</code>) captured exit codes with <code>status=$?</code>, and <code>status</code> is read-only in zsh. Verified directly (<code>zsh -c 'status=$?'</code> reproduces on demand); confirmed not a network issue (npm registry reachable). <strong>Fixed:</strong> renamed to <code>exit_code</code>.</p>
+<div class="w-callout" style="border-left-color:var(--text-muted)"><div class="w-lbl" style="color:var(--text-muted)">ℹ️ Didn't affect the pipeline above</div>
+<p style="font-size:12px">Only the Swarm/tmux path hits this bug. The Operations pipeline above works with zero fix needed.</p></div>
+
+<hr>
 
 <h2>Live Setup — Step by Step</h2>
 <ol class="steps">
-  <li>Ensure <code>hermes gateway run</code> and the Workspace UI are both running (Phase 0 check)</li>
-  <li>Open Hermes Workspace → <strong>Operations</strong> → <strong>New Agent</strong> → select a preset, then rewrite its description + system prompt to be generic and reusable (fix once, not per task)</li>
-  <li>Send the Researcher agent the task; wait for it to finish</li>
-  <li>Copy the Researcher's final output into a new agent's (Writer) task message</li>
-  <li>Copy the Writer's final output into a new agent's (Vetter) task message, asking for a clear verdict</li>
-  <li>Send the Main Orchestrator (pre-existing) a short status summary referencing all 3 agents' results</li>
-  <li>Review each agent's individual Chat session to audit the full handoff chain</li>
+  <li>Confirm gateway + Workspace UI running (Phase 0)</li>
+  <li>Operations → New Agent → pick a preset → rewrite description + system prompt to be generic (once)</li>
+  <li>Send Researcher the task; wait for it to finish</li>
+  <li>Copy its output into a new agent's (Writer) task message</li>
+  <li>Copy Writer's output into a new agent's (Vetter) task message, ask for a verdict</li>
+  <li>Send the Orchestrator a short status summary of all 3 results</li>
+  <li>Review each agent's Chat session to audit the chain</li>
 </ol>
 
 <div class="pro-tips"><button class="pt-toggle" onclick="pt(this)">⚡ Pro Tips <span class="arr">▼</span></button>
 <div class="pt-body">
-<div class="tip"><span class="i">⚡</span><span><strong>Expect at least one "operation interrupted":</strong> in this live run, both the Researcher and the Vetter got cut off mid-response at least once. A simple "please continue" follow-up message resolved it every time — treat this as a normal recovery step, not a fatal error.</span></div>
-<div class="tip"><span class="i">⚡</span><span><strong>The vetting gate caught a real bug:</strong> the Vetter executed the handed-off code and found a genuine data bug (introduced during the human relay, not by the Writer). This is exactly the value a vetting step is supposed to add — treat any "NEEDS REVISION" verdict as the pipeline working correctly, not failing.</span></div>
-<div class="tip"><span class="i">⚡</span><span><strong>Bar for a legitimate "I did multi-agent orchestration" claim:</strong> at least 2 distinct agents with a real handoff of output/context between them. Concurrency is not required.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Expect "operation interrupted":</strong> happened twice in this run. "Please continue" fixed it every time — normal recovery, not a failure.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>NEEDS REVISION = success, not failure:</strong> the Vetter executing code and catching a real bug is the gate working correctly.</span></div>
+<div class="tip"><span class="i">⚡</span><span><strong>Legit orchestration bar:</strong> 2+ distinct agents + a real handoff. Concurrency not required.</span></div>
 </div></div>
+
+<hr>
 
 <h2>Checklist — What You Actually Need to Fix or Check</h2>
 <p style="font-size:13px">A consolidated list, pulled from everything found during this run. Not every item applies to every machine — check the symptom column before assuming you need the fix.</p>
