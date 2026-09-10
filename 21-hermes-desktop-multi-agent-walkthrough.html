@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>21 - Hermes Agent Desktop Walkthrough - Hermes Training</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+<div class="section-num">Section 21</div>
+<span class="layer-badge lb2">Layer 2 - Hermes Agent</span>
+<span class="layer-badge lb3">Hermes Agent Desktop</span>
+<h1>Hermes Agent Desktop - Multi-Agent Walkthrough</h1>
+<div class="meta"><span class="badge bt">10 min</span><span class="badge bb">Beginner</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>You give the Hermes Desktop app one goal. The selected Hermes profile acts as the orchestrator, delegates smaller jobs to child agents, watches them finish, and reports the results back in the conversation.</p></div>
+
+<div class="callout" style="background:rgba(232,160,32,.08);border-left:3px solid var(--hermes);padding:10px 14px;border-radius:6px;font-size:12px;margin-bottom:16px">
+<strong>Desktop note:</strong> Desktop labels and layout can vary by release. Look for the profile/model controls and the new conversation control; verify the runtime through the evidence below.
+</div>
+
+<h2>1. Open a Desktop conversation</h2>
+<ol>
+<li>Launch <strong>Hermes.app</strong>.</li>
+<li>Start a new conversation using the app's new-chat or new-session control.</li>
+<li>Select the <code>conductor</code> profile, or the profile configured as your orchestrator.</li>
+<li>Confirm a model is selected before sending the goal.</li>
+</ol>
+<div class="use-case"><div class="uc-label">Checkpoint</div><p>The profile and model controls should show a usable configuration. If the model is blank, fix provider configuration before testing agents.</p></div>
+
+<h2>2. Run the smallest delegation test</h2>
+<div class="demo" style="margin:12px 0"><div class="demo-label">Paste into the Desktop conversation</div><pre data-prompt>You are the orchestrator. Delegate exactly two child tasks in parallel:
+Child A: compute 2+2.
+Child B: compute 3*3.
+Report each child ID, task, and result.</pre></div>
+
+<h2>3. Observe the live evidence</h2>
+<p>In the Desktop conversation, look for:</p>
+<ul><li>A visible <code>delegate_task</code> tool or activity event.</li><li>Two child-agent activities or result entries.</li><li>Progress such as <code>1/2</code> and <code>2/2</code>.</li><li>Completed status for both children.</li></ul>
+<div class="w-callout"><div class="w-lbl">Expected evidence</div><pre>delegate_task 1/2 - ALPHA Completed
+delegate_task 2/2 - BETA Completed</pre></div>
+
+<h2>4. Confirm the audit trail</h2>
+<p>Keep the Desktop conversation open or use its history/session view. The useful audit record is:</p>
+<ul><li>Original goal</li><li>Delegation event</li><li>Child IDs such as <code>sa-0-...</code></li><li>Child tasks and returned results</li><li>Final parent-agent synthesis</li></ul>
+<div class="callout" style="background:var(--hbg);border-left:3px solid var(--hermes);padding:10px 14px;border-radius:6px;font-size:12px;margin-bottom:16px"><strong>Proof standard:</strong> A final answer alone is not enough. Confirm that the activity trace shows multiple child agents and completed results.</div>
+
+<h2>5. Move to a real goal</h2>
+<div class="demo" style="margin:12px 0"><div class="demo-label">Example Desktop goal</div><pre>Research three approaches for this project, have one child draft an implementation plan,
+have another challenge the plan, then synthesize a recommendation. Ask me only the
+questions needed to resolve genuine ambiguity. Report child IDs, handoffs, blockers,
+and evidence before the final recommendation.</pre></div>
+
+<h2>What success means</h2>
+<table style="width:100%;border-collapse:collapse;font-size:12px;margin:12px 0">
+<tr style="border-bottom:1px solid var(--border)"><th style="text-align:left;padding:6px">Observed</th><th style="text-align:left;padding:6px">Meaning</th></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px"><code>delegate_task</code></td><td style="padding:6px">The orchestrator delegated instead of doing everything itself.</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Two child IDs</td><td style="padding:6px">Multiple agents actually participated.</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Completed results</td><td style="padding:6px">Child work returned to the parent agent.</td></tr>
+<tr><td style="padding:6px">Final synthesis</td><td style="padding:6px">The parent managed the handoff without manual copy/paste.</td></tr>
+</table>
+
+<div class="callout" style="background:rgba(244,71,71,.08);border-left:3px solid var(--red);padding:10px 14px;border-radius:6px;font-size:12px;margin-top:16px"><strong>Scope:</strong> This verifies native Hermes multi-agent delegation. It does not require the separate Hermes Studio visual Workflow canvas.</div>
+</main></div>
+<script src="app.js"></script>
+</body>
+</html>

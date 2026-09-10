@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>20 · Hermes Studio Chat Walkthrough — Hermes Training</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar"><div class="sidebar-header"><div class="brand">Hermes Agent</div><div class="sub">Training Guide</div></div><div id="nav"></div></nav>
+<main class="main">
+<div class="section-num">Section 20</div>
+<span class="layer-badge lb2">⚡ Layer 2 · Hermes Agent</span>
+<span class="layer-badge lb3">🌐 Hermes Studio</span>
+<h1>Hermes Studio Chat — Multi-Agent Walkthrough</h1>
+<div class="meta"><span class="badge bt">⏱ 10 min</span><span class="badge bb">Beginner</span></div>
+
+<div class="eli10"><div class="lbl">ELI10</div>
+<p>You give Hermes Studio Chat one goal. The <code>conductor</code> profile breaks it into smaller jobs, sends those jobs to child agents, watches them finish, and reports what happened. The proof is in the activity events and child results, not in the decorative Workflow canvas.</p></div>
+
+<div class="callout" style="background:rgba(78,201,176,.08);border-left:3px solid var(--l1);padding:10px 14px;border-radius:6px;font-size:12px;margin-bottom:16px">
+<strong>Verified path:</strong> Hermes Studio Chat → <code>conductor</code> profile → native <code>delegate_task</code> → child agents → final report.
+</div>
+
+<h2>1. Start the orchestrator</h2>
+<ol>
+<li>Open Hermes Studio at <code>http://localhost:8648</code>.</li>
+<li>Choose <strong>New Chat</strong>.</li>
+<li>Select profile <code>conductor</code>.</li>
+<li>Confirm the provider and model are populated. The tested route shows <code>github-copilot-gpt-4.1</code> and <code>gpt-4.1</code>.</li>
+</ol>
+<div class="use-case"><div class="uc-label">Checkpoint</div><p>If Provider or Model is empty, stop and fix configuration before testing orchestration.</p></div>
+
+<h2>2. Give it a test goal</h2>
+<div class="demo" style="margin:12px 0"><div class="demo-label">Paste into chat</div><pre data-prompt>You are the orchestrator. Delegate exactly two child tasks in parallel:
+Child A: compute 2+2.
+Child B: compute 3*3.
+Report each child ID, task, and result.</pre></div>
+<p>For a real project, replace the arithmetic with a goal that has independent research, implementation, and review work.</p>
+
+<h2>3. Watch the delegation evidence</h2>
+<p>During the run, look for:</p>
+<ul>
+<li>A tool event named <code>delegate_task</code>.</li>
+<li>Two child activities or child-result entries.</li>
+<li>Progress such as <code>1/2</code> and <code>2/2</code>.</li>
+<li>A completed status for each child.</li>
+</ul>
+<div class="w-callout"><div class="w-lbl">What success looks like</div>
+<pre>delegate_task 1/2 · ALPHA Completed
+delegate_task 2/2 · BETA Completed</pre>
+</div>
+
+<h2>4. Review the final proof</h2>
+<p>The orchestrator’s final response should contain:</p>
+<ul>
+<li>Each child agent ID, for example <code>sa-0-...</code>.</li>
+<li>The child’s task and result.</li>
+<li>A statement that both children completed.</li>
+<li>A synthesized answer or next action for the parent goal.</li>
+</ul>
+<div class="callout" style="background:var(--hbg);border-left:3px solid var(--hermes);padding:10px 14px;border-radius:6px;font-size:12px;margin-bottom:16px"><strong>Audit trail:</strong> Keep the chat session. Its prompt, tool events, child IDs, statuses, and final response are the audit record. Use session history to reopen it later.</div>
+
+<h2>5. Real-goal acceptance test</h2>
+<p>Use this only after the tiny test passes:</p>
+<div class="demo" style="margin:12px 0"><div class="demo-label">Example goal</div><pre>Research three approaches for this project, have one child draft an implementation plan,
+have another challenge the plan, then synthesize a recommendation. Ask me only the
+questions needed to resolve genuine ambiguity. Report child IDs, handoffs, blockers,
+and evidence before the final recommendation.</pre></div>
+
+<h2>What this proves</h2>
+<table style="width:100%;border-collapse:collapse;font-size:12px;margin:12px 0">
+<tr style="border-bottom:1px solid var(--border)"><th style="text-align:left;padding:6px">Observed</th><th style="text-align:left;padding:6px">Meaning</th></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px"><code>delegate_task</code> event</td><td style="padding:6px">The orchestrator actually delegated work.</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Multiple child IDs</td><td style="padding:6px">More than one agent participated.</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">Completed child results</td><td style="padding:6px">The work returned to the orchestrator.</td></tr>
+<tr><td style="padding:6px">Final synthesis</td><td style="padding:6px">The parent agent managed the result instead of requiring manual relay.</td></tr>
+</table>
+
+<div class="callout" style="background:rgba(244,71,71,.08);border-left:3px solid var(--red);padding:10px 14px;border-radius:6px;font-size:12px;margin-top:16px"><strong>Do not use for proof:</strong> the current Studio visual Workflow canvas. It saves graphs, but its runtime can fail before agents start. Chat delegation events are the reliable evidence.</div>
+
+</main></div>
+<script src="app.js"></script>
+</body>
+</html>

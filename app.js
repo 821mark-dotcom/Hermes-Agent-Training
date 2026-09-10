@@ -19,6 +19,8 @@ const NAV = [
   {href:'16-exercise-conductor.html',num:'17',label:'Exercise 2 · Mission to Board',time:'20m'},
   {href:'17-exercise-pipeline.html',num:'18',label:'Exercise 3 · Full Pipeline',time:'25m'},
   {href:'19-vibe-coder-case-study.html',num:'19',label:'Vibe Coder Case Study',time:'20m'},
+  {href:'20-desktop-multi-agent-walkthrough.html',num:'20',label:'Desktop Multi-Agent Walkthrough',time:'10m'},
+  {href:'21-hermes-desktop-multi-agent-walkthrough.html',num:'21',label:'Hermes Desktop Walkthrough',time:'10m'},
   {href:'appendix-quick-ref.html',num:'A',label:'Quick Reference',time:'5m'},
 ];
 function getNavCollapsed(){
